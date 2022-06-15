@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "quiz-67c39": {
+      "hosting": {
+        "quiz": [
+          "quiz-67c39"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "quiz-67c39"
+  }
+}

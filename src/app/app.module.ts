@@ -1,18 +1,53 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+
+import { MaterialUiModule } from './material-ui/material-ui.module';
+
+import { environment } from '../environments/environment';
+
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+
 import { AppComponent } from './app.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { DetailQuizComponent } from './components/detail-quiz/detail-quiz.component';
+import { CompletedQuizComponent } from './components/completed-quiz/completed-quiz.component';
+
+import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { HomeComponent } from './pages/home/home.component';
+import { FormComponent } from './pages/form/form.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    FormComponent,
+    CompletedQuizComponent,
+    LayoutComponent,
+    SidebarComponent,
+    SignInComponent,
+    SignUpComponent,
+    DetailQuizComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+    FormsModule,
+    BrowserAnimationsModule,
+    MaterialUiModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
