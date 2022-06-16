@@ -1,25 +1,45 @@
-<div class="sidebar">
-  <div class="sidebar__header">
-    <div class="avatar">
-      <img
-        src="https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg"
-        alt="avatar"
-      />
+<div class="sidebar" [class.show]="activeSidebar">
+  <div class="sidebar__content" [class.show__sidebar]="activeSidebar">
+    <button
+      mat-icon-button
+      aria-label="close icon"
+      class="btn__menu"
+      (click)="toggleSidebar()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <div class="sidebar__content__header">
+      <div class="avatar">
+        <img
+          src="https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg"
+          alt="avatar"
+        />
+      </div>
+      <h3>juan Pablo Agudelo</h3>
     </div>
-    <h3>juan Pablo Agudelo</h3>
-  </div>
-  <div class="sidebar__body">
-    <ul>
-      <li>
-        <a routerLink="my-list" routerLinkActive="active">my list quiz</a>
-      </li>
-      <li>
-        <a routerLink="create" routerLinkActive="active">create quiz</a>
-      </li>
-      <li>
-        <a href="#">show quiz realizados</a>
-      </li>
-    </ul>
+    <div class="sidebar__content__body">
+      <ul>
+        <li>
+          <a
+            routerLink="my-list"
+            (click)="toggleSidebar()"
+            routerLinkActive="active"
+            >my list quiz</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="create"
+            (click)="toggleSidebar()"
+            routerLinkActive="active"
+            >create quiz</a
+          >
+        </li>
+        <li>
+          <a href="#">show quiz realizados</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 <div class="sidebar__space"></div>

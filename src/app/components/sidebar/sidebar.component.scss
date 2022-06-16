@@ -1,55 +1,102 @@
 :host {
+  .btn__menu {
+    margin-left: 90%;
+    @media (min-width: 1250px) {
+      display: none;
+    }
+  }
+
   .sidebar {
-    width: 300px;
-    height: calc(100vh - 63px);
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 63px;
-    border: 1px solid #e6e6e6;
-    padding: 20px;
-
-    &__header {
-      text-align: center;
-      margin-top: 20px;
-
-      img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-      }
+    @media (max-width: 1250px) {
+      visibility: hidden;
+      width: 100vw;
+      position: fixed;
+      background: #3030308f;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
     }
 
-    &__body {
-      ul  {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        li {
-          margin-bottom: 10px;
-          a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: #333;
-            transition: background-color 0.2s;
+    &__content {
+      width: 300px;
+      height: calc(100vh - 63px);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 63px;
+      border: 1px solid #e6e6e6;
+      padding: 20px;
+      background-color: #fff;
 
-            &:hover, &.active {
-              background-color: #f5f5f5;
-              border-radius: 20px;
+      &__header {
+        text-align: center;
+        margin-top: 20px;
+
+        img {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+        }
+      }
+
+      &__body {
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            margin-bottom: 10px;
+
+            a {
+              display: block;
+              padding: 10px;
+              text-decoration: none;
+              color: #333;
+              transition: background-color 0.2s;
+
+              &:hover,
+              &.active {
+                background-color: #f5f5f5;
+                border-radius: 20px;
+              }
             }
           }
         }
       }
+
+      @media (max-width: 1250px) {
+        z-index: 1;
+        left: -100%;
+        opacity: 0;
+        transition: all 0.5s ease-in-out;
+      }
+
+      @media (max-width: 600px) {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        box-sizing: border-box;
+        height: 100vh;
+      }
     }
   }
+
   .sidebar__space {
     width: 345px;
+    @media (max-width: 1250px) {
+      display: none;
+    }
   }
 
+  .show {
+    visibility: visible;
+  }
 
-  
-  @media (max-width: 1250px) {
-    display: none;
+  .show__sidebar {
+    left: 0;
+    opacity: 1;
   }
 }

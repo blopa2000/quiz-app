@@ -1,4 +1,14 @@
 <mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    class="btn-menu"
+    *ngIf="isProfile"
+    (click)="toggleSidebar()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
   <span>Quiz App</span>
   <span class="spacer"></span>
   <button
