@@ -1,4 +1,7 @@
 :host {
+  .btn__menu {
+    margin-left: 90%;
+  }
   .sidebar {
     width: 300px;
     height: calc(100vh - 63px);
@@ -8,6 +11,7 @@
     top: 63px;
     border: 1px solid #e6e6e6;
     padding: 20px;
+    background-color: #fff;
 
     &__header {
       text-align: center;
@@ -21,7 +25,7 @@
     }
 
     &__body {
-      ul  {
+      ul {
         list-style: none;
         padding: 0;
         margin: 0;
@@ -34,7 +38,8 @@
             color: #333;
             transition: background-color 0.2s;
 
-            &:hover, &.active {
+            &:hover,
+            &.active {
               background-color: #f5f5f5;
               border-radius: 20px;
             }
@@ -42,14 +47,29 @@
         }
       }
     }
+    @media (max-width: 1250px) {
+      z-index: 1;
+      left: -100%;
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+    }
+    @media (max-width: 600px) {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      box-sizing: border-box;
+      height: 100vh;
+    }
   }
   .sidebar__space {
     width: 345px;
+    @media (max-width: 1250px) {
+      display: none;
+    }
   }
 
-
-  
-  @media (max-width: 1250px) {
-    display: none;
+  .show {
+    left: 0;
+    opacity: 1;
   }
 }

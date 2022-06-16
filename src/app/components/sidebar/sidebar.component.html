@@ -1,4 +1,12 @@
-<div class="sidebar">
+<div class="sidebar" [class.show]="activeSidebar">
+  <button
+    mat-icon-button
+    aria-label="close icon"
+    class="btn__menu"
+    (click)="toggleSidebar()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
   <div class="sidebar__header">
     <div class="avatar">
       <img
@@ -11,10 +19,20 @@
   <div class="sidebar__body">
     <ul>
       <li>
-        <a routerLink="my-list" routerLinkActive="active">my list quiz</a>
+        <a
+          routerLink="my-list"
+          (click)="toggleSidebar()"
+          routerLinkActive="active"
+          >my list quiz</a
+        >
       </li>
       <li>
-        <a routerLink="create" routerLinkActive="active">create quiz</a>
+        <a
+          routerLink="create"
+          (click)="toggleSidebar()"
+          routerLinkActive="active"
+          >create quiz</a
+        >
       </li>
       <li>
         <a href="#">show quiz realizados</a>

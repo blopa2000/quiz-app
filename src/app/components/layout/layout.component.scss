@@ -15,4 +15,12 @@
   .active {
     background: #a7154f;
   }
+
+  .btn-menu {
+    display: none;
+
+    @media (max-width: 1250px) {
+      display: block;  
+    }
+  }
 }
