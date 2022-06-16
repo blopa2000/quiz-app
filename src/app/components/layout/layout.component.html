@@ -1,14 +1,28 @@
 <mat-toolbar color="primary">
   <span>Quiz App</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button aria-label="home icon">
+  <span class="spacer"></span>
+  <button
+    routerLink="home"
+    matTooltip="home"
+    mat-icon-button
+    aria-label="home icon"
+    routerLinkActive="active"
+  >
     <mat-icon>home</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="share icon">
+
+  <button
+    routerLink="profile/34345345/my-list"
+    mat-icon-button
+    matTooltip="profile"
+    aria-label="share icon"
+    routerLinkActive="active"
+  >
     <mat-icon>person</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="exit icon">
+  <button mat-icon-button matTooltip="exit" aria-label="exit icon">
     <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
+<div class="toolbar__space"></div>
 <router-outlet></router-outlet>

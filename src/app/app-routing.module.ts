@@ -5,12 +5,20 @@ import { FormComponent } from './pages/form/form.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+
+import { CardQuizComponent } from '@shared/components/card-quiz/card-quiz.component';
+
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', component: HomeComponent },
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full',
+      },
+      { path: 'home', component: HomeComponent },
       {
         path: 'profile/:id',
         loadChildren: () =>

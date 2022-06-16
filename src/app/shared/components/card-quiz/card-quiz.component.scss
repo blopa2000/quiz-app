@@ -1,0 +1,33 @@
+:host {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  &::ng-deep.mat-card {
+    margin: 10px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    &::ng-deep.mat-card-header-text {
+      font-size: 1.2rem;
+    }
+  }
+
+  .mat-card:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+
+  .menu__card {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+}

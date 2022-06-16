@@ -1,1 +1,32 @@
-<p>card-quiz works!</p>
+<mat-card
+  (click)="goForm()"
+  *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+>
+  <div class="menu__card" *ngIf="isProfile">
+    <button appStopPropagation mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>edit</button>
+      <button mat-menu-item>delete</button>
+    </mat-menu>
+  </div>
+  <mat-card-header>
+    <mat-card-title>
+      <h1>
+        <span>matematicas</span>
+      </h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>esta prueba es de matematicas y es para ver si funciona</p>
+    <input
+      *ngIf="isProfile"
+      appStopPropagation
+      type="text"
+      name=""
+      id=""
+      [value]="url"
+    />
+  </mat-card-content>
+</mat-card>
