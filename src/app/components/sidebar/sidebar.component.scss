@@ -82,6 +82,19 @@
         height: 100vh;
       }
     }
+    @media (max-width: 1250px) {
+      z-index: 1;
+      left: -100%;
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+    }
+    @media (max-width: 600px) {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      box-sizing: border-box;
+      height: 100vh;
+    }
   }
 
   .sidebar__space {
