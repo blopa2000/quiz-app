@@ -8,6 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
   declarations: [],
   imports: [
@@ -19,6 +22,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatTooltipModule,
     MatSidenavModule,
     MatMenuModule,
+    MatInputModule,
+    DragDropModule,
+    MatRadioModule,
   ],
   exports: [
     MatCardModule,
@@ -28,6 +34,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatTooltipModule,
     MatSidenavModule,
     MatMenuModule,
+    MatInputModule,
+    DragDropModule,
+    MatRadioModule,
   ],
 })
 export class MaterialUiModule {}

@@ -1,1 +1,65 @@
-<p>create-quiz works!</p>
+<div class="contanier">
+  <mat-card class="card__form">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput value="" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder=""></textarea>
+    </mat-form-field>
+  </mat-card>
+
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let question of formQuiz" cdkDrag>
+      <mat-card class="card">
+        <div class="drag__card">
+          <mat-icon>drag_handle</mat-icon>
+        </div>
+        <mat-card-title>
+          <h4>{{ question.title }}</h4>
+        </mat-card-title>
+        <mat-radio-group class="options" aria-label="Select an option">
+          <div *ngFor="let answer of question.answers">
+            <mat-radio-button [value]="answer.id">{{
+              answer.title
+            }}</mat-radio-button>
+          </div>
+        </mat-radio-group>
+      </mat-card>
+    </div>
+  </div>
+
+  <mat-card class="card card__form">
+    <mat-form-field appearance="fill">
+      <mat-label>Question title</mat-label>
+      <input matInput value="" />
+    </mat-form-field>
+
+    <mat-radio-group class="options" aria-label="Select an option">
+      <div>
+        <mat-radio-button value="1">answer 1</mat-radio-button>
+      </div>
+      <div>
+        <mat-radio-button value="2">answer 2</mat-radio-button>
+      </div>
+      <div class="card__form__radio">
+        <mat-icon>radio_button_unchecked</mat-icon>
+
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="New answer..." value="" />
+        </mat-form-field>
+
+        <button matTooltip="add answer" mat-icon-button aria-label="add icon">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </div>
+    </mat-radio-group>
+    <button class="btn__add__form" mat-stroked-button>add question</button>
+  </mat-card>
+
+  <button class="btn__add__form save" mat-raised-button color="primary">
+    Save quiz
+  </button>
+</div>

@@ -1,0 +1,77 @@
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  margin: 10px 0 90px;
+
+  .contanier {
+    position: relative;
+    width: 700px;
+
+    @media screen and (max-width: 750px) {
+      width: 100%;
+      margin: 0 5px;
+    }
+  }
+
+  .card__form {
+    margin-bottom: 20px;
+
+    &::ng-deep.mat-form-field {
+      width: 100%;
+    }
+
+    &__radio {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      &::ng-deep.mat-form-field {
+        width: 85%;
+      }
+    }
+  }
+
+  .card {
+    margin-bottom: 20px;
+    position: relative;
+    .drag__card {
+      position: absolute;
+      top: 0;
+      opacity: 0.5;
+
+      &:nth-child(1) {
+        margin-left: 45%;
+      }
+    }
+    h4 {
+      margin: 0;
+      margin-top: 20px;
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+
+      div {
+        margin: 10px;
+
+        &::ng-deep.mat-radio-label-content::first-letter {
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  .btn__add__form {
+    display: block;
+    margin: auto;
+  }
+
+  .save {
+    font-size: 30px;
+    padding: 10px;
+  }
+}
