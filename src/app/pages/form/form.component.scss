@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 50px;
+
+  .card {
+    width: 600px;
+    margin: 10px 0;
+
+    .options {
+      div {
+        margin: 10px;
+
+        &::ng-deep.mat-radio-label-content::first-letter {
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  .send {
+    margin-bottom: 50px;
+  }
+}
