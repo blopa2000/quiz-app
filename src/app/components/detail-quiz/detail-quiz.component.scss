@@ -1,0 +1,7 @@
+:host {
+  width: 70%;
+  margin: 10px auto;
+  &::ng-deep.mat-table {
+    width: 100%;
+  }
+}

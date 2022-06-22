@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
-import {
-  Firestore,
-  collection,
-  getDocs,
-  QueryDocumentSnapshot,
-} from '@angular/fire/firestore';
+import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { UserService } from '@services/user/user.service';
 
 interface Items {
   data: string;
@@ -15,16 +11,16 @@ interface Items {
   template: '<router-outlet></router-outlet>',
 })
 export class AppComponent {
-  item: Items[] = [{ data: '', id: '' }];
+  // item: Items[] = [{ data: '', id: '' }];
 
   constructor(private firestore: Firestore) {
-    this.getdata();
+    // this.getdata();
   }
 
-  async getdata() {
-    const data = await getDocs(collection(this.firestore, 'items'));
-    data.forEach((d: any) => {
-      this.item = [{ ...d.data(), id: d.id }];
-    });
-  }
+  // async getdata() {
+  //   const data = await getDocs(collection(this.firestore, 'items'));
+  //   data.forEach((d: any) => {
+  //     this.item = [{ ...d.data(), id: d.id }];
+  //   });
+  // }
 }

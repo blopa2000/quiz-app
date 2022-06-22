@@ -4,6 +4,7 @@ import { ProfileComponent } from './profile.component';
 
 import { CardQuizComponent } from '@shared/components/card-quiz/card-quiz.component';
 import { CreateQuizComponent } from '@components/create-quiz/create-quiz.component';
+import { DetailQuizComponent } from '@components/detail-quiz/detail-quiz.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'create',
         component: CreateQuizComponent,
+      },
+      {
+        path: 'detail/:id',
+        component: DetailQuizComponent,
       },
     ],
   },

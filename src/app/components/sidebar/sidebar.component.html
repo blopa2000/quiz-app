@@ -11,11 +11,15 @@
     <div class="sidebar__content__header">
       <div class="avatar">
         <img
-          src="https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg"
+          [src]="
+            user?.avatar == ''
+              ? 'https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg'
+              : user?.avatar
+          "
           alt="avatar"
         />
       </div>
-      <h3>juan Pablo Agudelo</h3>
+      <h3>{{ user?.name | uppercase }}</h3>
     </div>
     <div class="sidebar__content__body">
       <ul>
@@ -35,9 +39,9 @@
             >create quiz</a
           >
         </li>
-        <li>
+        <!-- <li>
           <a href="#">show quiz realizados</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>

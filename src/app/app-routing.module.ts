@@ -6,7 +6,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
-import { CardQuizComponent } from '@shared/components/card-quiz/card-quiz.component';
+import { AccessGuard } from '@guards/access/access.guard';
 
 const routes: Routes = [
   {
@@ -18,11 +18,12 @@ const routes: Routes = [
         redirectTo: '/home',
         pathMatch: 'full',
       },
-      { path: 'home', component: HomeComponent },
+      { path: 'home', component: HomeComponent, canActivate: [AccessGuard] },
       {
         path: 'profile/:id',
         loadChildren: () =>
           import('./pages/profile/profile.module').then((m) => m.ProfileModule),
+        canActivate: [AccessGuard],
       },
       {
         path: 'quiz/:name/:id',

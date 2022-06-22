@@ -11,6 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [],
   imports: [
@@ -25,6 +27,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatInputModule,
     DragDropModule,
     MatRadioModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   exports: [
     MatCardModule,
@@ -37,6 +41,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatInputModule,
     DragDropModule,
     MatRadioModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
 })
 export class MaterialUiModule {}

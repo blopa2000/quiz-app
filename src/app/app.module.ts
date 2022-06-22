@@ -16,7 +16,6 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 
 import { AppComponent } from './app.component';
 import { LayoutComponent } from '@components/layout/layout.component';
-import { DetailQuizComponent } from '@components/detail-quiz/detail-quiz.component';
 import { CompletedQuizComponent } from '@components/completed-quiz/completed-quiz.component';
 
 import { SignInComponent } from './pages/sign-in/sign-in.component';
@@ -33,7 +32,6 @@ import { FormComponent } from './pages/form/form.component';
     LayoutComponent,
     SignInComponent,
     SignUpComponent,
-    DetailQuizComponent,
   ],
   imports: [
     BrowserModule,

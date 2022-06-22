@@ -22,7 +22,7 @@
   </button>
 
   <button
-    routerLink="profile/34345345/my-list"
+    [routerLink]="['profile', user.uid, 'my-list']"
     mat-icon-button
     matTooltip="profile"
     aria-label="share icon"
@@ -30,7 +30,12 @@
   >
     <mat-icon>person</mat-icon>
   </button>
-  <button mat-icon-button matTooltip="exit" aria-label="exit icon">
+  <button
+    mat-icon-button
+    matTooltip="exit"
+    aria-label="exit icon"
+    (click)="exit()"
+  >
     <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
