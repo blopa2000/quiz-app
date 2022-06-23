@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -9,13 +9,11 @@ import { Location } from '@angular/common';
 })
 export class CardQuizComponent implements OnInit {
   isProfile: boolean = false;
-  url: string = '';
 
   constructor(private router: Router, private location: Location) {}
 
   ngOnInit(): void {
-    this.url = 'localhost:4200/' + this.location.path();
-    if (this.url.split('/')[2] == 'profile') this.isProfile = true;
+    if (this.location.path().split('/')[1] == 'profile') this.isProfile = true;
   }
 
   goForm() {

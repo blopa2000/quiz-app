@@ -9,6 +9,7 @@ import { CreateQuizComponent } from '@components/create-quiz/create-quiz.compone
 import { DetailQuizComponent } from '@components/detail-quiz/detail-quiz.component';
 
 import { MaterialUiModule } from '@material';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,11 @@ import { MaterialUiModule } from '@material';
     CreateQuizComponent,
     DetailQuizComponent,
   ],
-  imports: [CommonModule, ProfileRoutingModule, MaterialUiModule],
+  imports: [
+    CommonModule,
+    ProfileRoutingModule,
+    MaterialUiModule,
+    ReactiveFormsModule,
+  ],
 })
 export class ProfileModule {}

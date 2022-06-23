@@ -1,30 +1,56 @@
 <div class="contanier">
   <mat-card class="card__form">
-    <mat-form-field appearance="fill">
-      <mat-label>Title</mat-label>
-      <input matInput value="" />
-    </mat-form-field>
+    <form [formGroup]="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" />
+        <mat-error
+          *ngIf="titleField?.touched && titleField?.hasError('required')"
+        >
+          title is required
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Description</mat-label>
-      <textarea matInput placeholder=""></textarea>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+        <mat-error
+          *ngIf="
+            descriptionField?.touched && descriptionField?.hasError('required')
+          "
+        >
+          description is required
+        </mat-error>
+      </mat-form-field>
+    </form>
   </mat-card>
 
-  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let question of formQuiz" cdkDrag>
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let question of questions; let i = index" cdkDrag>
       <mat-card class="card">
         <div class="drag__card">
           <mat-icon>drag_handle</mat-icon>
         </div>
+        <button
+          aria-label="delete icon"
+          matTooltip="delete this question"
+          mat-icon-button
+          class="btn__delete__question"
+          (click)="deleteQuestion(i)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
         <mat-card-title>
           <h4>{{ question.title }}</h4>
         </mat-card-title>
-        <mat-radio-group class="options" aria-label="Select an option">
+        <mat-radio-group class="options">
           <div *ngFor="let answer of question.answers">
-            <mat-radio-button [value]="answer.id">{{
-              answer.title
-            }}</mat-radio-button>
+            <mat-radio-button
+              disabled
+              [checked]="answer.isCorrect"
+              [value]="answer.text"
+              >{{ answer.text }}</mat-radio-button
+            >
           </div>
         </mat-radio-group>
       </mat-card>
@@ -34,32 +60,84 @@
   <mat-card class="card card__form">
     <mat-form-field appearance="fill">
       <mat-label>Question title</mat-label>
-      <input matInput value="" />
+      <input matInput value="" [formControl]="titleQustionField" />
+      <mat-error
+        *ngIf="
+          titleQustionField?.touched && titleQustionField?.hasError('required')
+        "
+      >
+        title is required
+      </mat-error>
     </mat-form-field>
 
-    <mat-radio-group class="options" aria-label="Select an option">
-      <div>
-        <mat-radio-button value="1">answer 1</mat-radio-button>
-      </div>
-      <div>
-        <mat-radio-button value="2">answer 2</mat-radio-button>
-      </div>
-      <div class="card__form__radio">
-        <mat-icon>radio_button_unchecked</mat-icon>
-
-        <mat-form-field appearance="fill">
-          <input matInput placeholder="New answer..." value="" />
-        </mat-form-field>
-
-        <button matTooltip="add answer" mat-icon-button aria-label="add icon">
-          <mat-icon>add_circle</mat-icon>
+    <mat-radio-group class="options">
+      <div *ngFor="let answer of answers; let i = index">
+        <mat-radio-button
+          disabled
+          [checked]="answer.isCorrect"
+          [value]="answer.text"
+        >
+          {{ answer.text }}
+        </mat-radio-button>
+        <button
+          aria-label="delete icon"
+          matTooltip="delete this answer"
+          mat-icon-button
+          class="btn__delete__answer"
+          (click)="deleteanswer(i)"
+        >
+          <mat-icon>close</mat-icon>
         </button>
       </div>
+
+      <div class="card__form__radio">
+        <mat-icon>radio_button_unchecked</mat-icon>
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            placeholder="New answer..."
+            value=""
+            [formControl]="answerTextFiled"
+            (keyup.enter)="addAnswer()"
+          />
+        </mat-form-field>
+
+        <button
+          matTooltip="add answer"
+          mat-icon-button
+          aria-label="add icon"
+          (click)="addAnswer()"
+        >
+          <mat-icon>add_circle</mat-icon>
+        </button>
+
+        <button
+          matTooltip="this is the correct answer"
+          mat-icon-button
+          aria-label="add icon"
+          [disabled]="isCorrectAnswer === null"
+          (click)="isCorrectAnswer = true"
+        >
+          <mat-icon>done</mat-icon>
+        </button>
+      </div>
+
+      <div class="alert" [class.alert-show]="alertAnswer.show">
+        <span> {{ alertAnswer.message }} </span>
+      </div>
     </mat-radio-group>
-    <button class="btn__add__form" mat-stroked-button>add question</button>
+    <button class="btn__add__form" mat-stroked-button (click)="saveQuestion()">
+      add question
+    </button>
   </mat-card>
 
-  <button class="btn__add__form save" mat-raised-button color="primary">
+  <button
+    class="btn__add__form save"
+    mat-raised-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="saveQuiz()"
+  >
     Save quiz
   </button>
 </div>

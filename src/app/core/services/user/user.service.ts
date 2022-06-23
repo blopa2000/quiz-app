@@ -8,7 +8,10 @@ import { UserExists } from '@models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  private user = new BehaviorSubject<boolean>(false);
+  private user = new BehaviorSubject<UserExists>({
+    email: '',
+    uid: '',
+  });
 
   user$ = this.user.asObservable();
 

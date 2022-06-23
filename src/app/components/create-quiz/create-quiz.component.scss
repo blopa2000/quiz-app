@@ -19,6 +19,7 @@
 
     &::ng-deep.mat-form-field {
       width: 100%;
+      margin-bottom: 5px;
     }
 
     &__radio {
@@ -44,9 +45,15 @@
         margin-left: 45%;
       }
     }
+    .btn__delete__question {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
     h4 {
       margin: 0;
       margin-top: 20px;
+      word-break: break-all;
       &::first-letter {
         text-transform: uppercase;
       }
@@ -57,9 +64,15 @@
 
       div {
         margin: 10px;
-
+        position: relative;
         &::ng-deep.mat-radio-label-content::first-letter {
           text-transform: uppercase;
+        }
+        .btn__delete__answer {
+          position: absolute;
+          position: absolute;
+          right: 0;
+          top: -10px;
         }
       }
     }
@@ -68,10 +81,29 @@
   .btn__add__form {
     display: block;
     margin: auto;
+    &:disabled,
+    &[disabled] {
+      background-color: #cccccc;
+      color: #666666;
+    }
   }
 
   .save {
     font-size: 30px;
     padding: 10px;
+  }
+
+  .alert {
+    position: absolute;
+    bottom: 70px;
+    left: 40px;
+    color: #db483c;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+
+    &-show {
+      bottom: 52px;
+      opacity: 1;
+    }
   }
 }
