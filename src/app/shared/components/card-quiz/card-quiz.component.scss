@@ -8,6 +8,7 @@
     margin: 10px;
     transition: all 0.3s ease-in-out;
     position: relative;
+    max-width: 300px;
     &::ng-deep.mat-card-header-text {
       font-size: 1.2rem;
     }

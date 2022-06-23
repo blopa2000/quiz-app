@@ -13,4 +13,5 @@ export interface Quiz {
   description: string;
   questions: Question[];
   correctAnswers: Answer[];
+  id?: string;
 }

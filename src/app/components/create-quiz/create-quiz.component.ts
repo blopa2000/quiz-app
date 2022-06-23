@@ -26,50 +26,7 @@ export class CreateQuizComponent {
 
   user!: UserExists;
   answers: Answer[] = [];
-  questions: Question[] = [
-    {
-      title: 'What is the capital of France?',
-      answers: [
-        {
-          text: 'Paris',
-          isCorrect: true,
-        },
-        {
-          text: 'Lyon',
-          isCorrect: false,
-        },
-        {
-          text: 'Marseille',
-          isCorrect: false,
-        },
-        {
-          text: 'Toulouse',
-          isCorrect: false,
-        },
-      ],
-    },
-    {
-      title: 'What is the capital of Germany?',
-      answers: [
-        {
-          text: 'Berlin',
-          isCorrect: true,
-        },
-        {
-          text: 'Munich',
-          isCorrect: false,
-        },
-        {
-          text: 'Frankfurt',
-          isCorrect: false,
-        },
-        {
-          text: 'Hamburg',
-          isCorrect: false,
-        },
-      ],
-    },
-  ];
+  questions: Question[] = [];
   isCorrectAnswer: boolean | null = false;
   alertAnswer = {
     show: false,

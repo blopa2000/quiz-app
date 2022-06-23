@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import {
+  Firestore,
+  addDoc,
+  collection,
+  getDocs,
+  where,
+  query,
+} from '@angular/fire/firestore';
 import { Quiz } from '@models/quiz.model';
 
 @Injectable({
@@ -19,6 +26,20 @@ export class QuizService {
     } catch (error) {
       console.error(error);
       return false;
+    }
+  }
+
+  async getQuizzesByUserID(userUID: string, operator: any) {
+    try {
+      const res = await getDocs(
+        query(
+          collection(this.firestore, 'quizzes'),
+          where('userUID', operator, userUID)
+        )
+      );
+      return res;
+    } catch (error) {
+      return error;
     }
   }
 }

@@ -1,7 +1,4 @@
-<mat-card
-  (click)="goForm()"
-  *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
->
+<mat-card (click)="goForm(quiz.id)" *ngFor="let quiz of quizzes">
   <div class="menu__card" *ngIf="isProfile">
     <button appStopPropagation mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
@@ -15,19 +12,19 @@
   <mat-card-header>
     <mat-card-title>
       <h1>
-        <span>matematicas</span>
+        <span>{{ quiz.title }}</span>
       </h1>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <p>esta prueba es de matematicas y es para ver si funciona</p>
+    <p>{{ quiz.description }}</p>
     <input
       *ngIf="isProfile"
       appStopPropagation
       type="text"
       name=""
       id=""
-      value="url"
+      [value]="transformUrlshated(quiz.id)"
     />
   </mat-card-content>
 </mat-card>
