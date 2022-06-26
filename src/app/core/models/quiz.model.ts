@@ -13,5 +13,6 @@ export interface Quiz {
   description: string;
   questions: Question[];
   correctAnswers: Answer[];
-  id?: string;
+  id?: string | any;
+  userUID?: string | any;
 }

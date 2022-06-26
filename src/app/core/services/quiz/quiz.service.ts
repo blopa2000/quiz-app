@@ -6,8 +6,12 @@ import {
   getDocs,
   where,
   query,
+  getDoc,
+  doc,
+  setDoc,
 } from '@angular/fire/firestore';
 import { Quiz } from '@models/quiz.model';
+import { promises } from 'dns';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +33,15 @@ export class QuizService {
     }
   }
 
+  async getQuiz(quizID: string | any): Promise<Quiz | any> {
+    try {
+      const res = await getDoc(doc(this.firestore, 'quizzes', quizID));
+      return res.data();
+    } catch (error) {
+      return error;
+    }
+  }
+
   async getQuizzesByUserID(userUID: string, operator: any) {
     try {
       const res = await getDocs(
@@ -38,6 +51,24 @@ export class QuizService {
         )
       );
       return res;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async saveResult(
+    quizID: string,
+    userUID: string,
+    results: { name: string; result: string }
+  ) {
+    try {
+      const res = await setDoc(
+        doc(this.firestore, 'quizzes', quizID, 'userResults', userUID),
+        {
+          ...results,
+        }
+      );
+      return true;
     } catch (error) {
       return error;
     }

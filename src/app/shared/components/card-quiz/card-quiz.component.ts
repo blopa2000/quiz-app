@@ -48,11 +48,11 @@ export class CardQuizComponent implements OnInit {
     });
   }
 
-  goForm(id: string | undefined) {
-    this.router.navigate([this.transformUrlshated(id)]);
+  goForm(id: string | undefined, userUID: string) {
+    this.router.navigate([this.transformUrlshated(id, userUID)]);
   }
 
-  transformUrlshated(id: string | undefined) {
-    return `quiz/${this.user.uid}/${id}`;
+  transformUrlshated(id: string | undefined, userUID: string) {
+    return `quiz/${userUID}/${id}`;
   }
 }

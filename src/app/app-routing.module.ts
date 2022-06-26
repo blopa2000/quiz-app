@@ -26,7 +26,7 @@ const routes: Routes = [
         canActivate: [AccessGuard],
       },
       {
-        path: 'quiz/:userUID/:quizId',
+        path: 'quiz/:userUID/:quizID',
         component: FormComponent,
       },
     ],

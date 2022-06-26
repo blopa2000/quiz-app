@@ -1,4 +1,4 @@
-<mat-card (click)="goForm(quiz.id)" *ngFor="let quiz of quizzes">
+<mat-card (click)="goForm(quiz.id, quiz.userUID)" *ngFor="let quiz of quizzes">
   <div class="menu__card" *ngIf="isProfile">
     <button appStopPropagation mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
@@ -24,7 +24,7 @@
       type="text"
       name=""
       id=""
-      [value]="transformUrlshated(quiz.id)"
+      [value]="transformUrlshated(quiz.id, quiz.userUID)"
     />
   </mat-card-content>
 </mat-card>

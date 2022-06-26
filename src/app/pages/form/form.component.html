@@ -1,97 +1,46 @@
 <mat-card class="card">
   <mat-card-title>
-    <h4>examen de base de datos</h4>
+    <h4>{{ quiz.title }}</h4>
   </mat-card-title>
   <mat-radio-group class="options" aria-label="Select an option">
     <div>
       <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
-        necessitatibus vel aut consequatur quis! Hic quas porro incidunt impedit
-        nemo. Amet earum eius voluptate nulla, repellat alias accusantium nisi
-        recusandae.
+        {{ quiz.description }}
       </p>
     </div>
   </mat-radio-group>
 </mat-card>
 
-<mat-card class="card">
-  <mat-card-title>
-    <h4>question</h4>
-  </mat-card-title>
-  <mat-radio-group class="options" aria-label="Select an option">
-    <div>
-      <mat-radio-button value="answer.id"> answer 1 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 2 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 3 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 4 </mat-radio-button>
-    </div>
-  </mat-radio-group>
-</mat-card>
+<form [formGroup]="form" (ngSubmit)="saveForm()">
+  <mat-card
+    class="card"
+    formArrayName="selects"
+    *ngFor="let question of quiz.questions; let i = index"
+  >
+    <mat-card-title>
+      <h4>{{ question.title }} *</h4>
+    </mat-card-title>
+    <mat-radio-group class="options" [formControlName]="i">
+      <div *ngFor="let answer of question.answers">
+        <mat-radio-button [value]="answer.text">
+          {{ answer.text }}
+        </mat-radio-button>
+      </div>
+      <mat-error
+        *ngIf="selectsField.at(i)?.touched && selectsField.controls[i].errors"
+      >
+        This question is required
+      </mat-error>
+    </mat-radio-group>
+  </mat-card>
 
-<mat-card class="card">
-  <mat-card-title>
-    <h4>question</h4>
-  </mat-card-title>
-  <mat-radio-group class="options" aria-label="Select an option">
-    <div>
-      <mat-radio-button value="answer.id"> answer 1 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 2 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 3 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 4 </mat-radio-button>
-    </div>
-  </mat-radio-group>
-</mat-card>
-
-<mat-card class="card">
-  <mat-card-title>
-    <h4>question</h4>
-  </mat-card-title>
-  <mat-radio-group class="options" aria-label="Select an option">
-    <div>
-      <mat-radio-button value="answer.id"> answer 1 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 2 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 3 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 4 </mat-radio-button>
-    </div>
-  </mat-radio-group>
-</mat-card>
-
-<mat-card class="card">
-  <mat-card-title>
-    <h4>question</h4>
-  </mat-card-title>
-  <mat-radio-group class="options" aria-label="Select an option">
-    <div>
-      <mat-radio-button value="answer.id"> answer 1 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 2 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 3 </mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button value="answer.id"> answer 4 </mat-radio-button>
-    </div>
-  </mat-radio-group>
-</mat-card>
-
-<button class="send" mat-raised-button color="primary">send</button>
+  <button
+    type="submit"
+    class="btn__form"
+    mat-raised-button
+    color="primary"
+    [disabled]="form.invalid"
+  >
+    send
+  </button>
+</form>
