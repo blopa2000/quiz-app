@@ -12,6 +12,9 @@ import {
 import { UserService } from '@services/user/user.service';
 import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '@components/dialog/dialog.component';
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -29,13 +32,18 @@ export class FormComponent implements OnInit {
     userUID: '',
   };
   user: any = {};
+  alert = {
+    show: false,
+    message: '',
+  };
 
   constructor(
     private Router: ActivatedRoute,
     private quizService: QuizService,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private auth: Auth
+    private auth: Auth,
+    public dialog: MatDialog
   ) {
     this.buildForm();
   }
@@ -57,10 +65,11 @@ export class FormComponent implements OnInit {
         const res = await this.userService.getUser(currentuser.uid);
         this.user = {
           uid: currentuser.uid,
+          email: currentuser?.email,
           ...res,
         };
       } else {
-        console.log('modal');
+        this.openDialog();
       }
     });
   }
@@ -78,14 +87,25 @@ export class FormComponent implements OnInit {
       const dto = {
         name: this.user.name,
         result: `${counter}/${this.quiz.correctAnswers.length}`,
+        email: this.user.email,
       };
-      const res = await this.quizService.saveResult(
+      const res: any = await this.quizService.saveResult(
         this.quiz.id,
         this.user.uid,
         dto
       );
-      if (res) {
+
+      if (res.state) {
         console.log('redireccionar');
+      } else {
+        this.alert = {
+          show: true,
+          message: res.message,
+        };
+
+        setTimeout(() => {
+          this.alert.show = false;
+        }, 5000);
       }
     } else {
       this.form.markAllAsTouched();
@@ -100,6 +120,16 @@ export class FormComponent implements OnInit {
 
   private createSelect() {
     this.selectsField.push(new FormControl('', Validators.required));
+  }
+
+  private openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '500px',
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.user = { ...result, uid: undefined };
+    });
   }
 
   get selectsField() {

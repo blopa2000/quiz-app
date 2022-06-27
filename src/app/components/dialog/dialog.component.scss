@@ -1,0 +1,10 @@
+
+.content__dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+::ng-deep.mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+}

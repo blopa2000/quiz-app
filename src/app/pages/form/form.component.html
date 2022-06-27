@@ -1,46 +1,57 @@
-<mat-card class="card">
-  <mat-card-title>
-    <h4>{{ quiz.title }}</h4>
-  </mat-card-title>
-  <mat-radio-group class="options" aria-label="Select an option">
-    <div>
-      <p>
-        {{ quiz.description }}
-      </p>
-    </div>
-  </mat-radio-group>
-</mat-card>
+<div *ngIf="quiz.questions.length == 0" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
 
-<form [formGroup]="form" (ngSubmit)="saveForm()">
-  <mat-card
-    class="card"
-    formArrayName="selects"
-    *ngFor="let question of quiz.questions; let i = index"
-  >
+<div *ngIf="quiz.questions.length">
+  <mat-card class="card">
     <mat-card-title>
-      <h4>{{ question.title }} *</h4>
+      <h4>{{ quiz.title }}</h4>
     </mat-card-title>
-    <mat-radio-group class="options" [formControlName]="i">
-      <div *ngFor="let answer of question.answers">
-        <mat-radio-button [value]="answer.text">
-          {{ answer.text }}
-        </mat-radio-button>
+    <mat-radio-group class="options" aria-label="Select an option">
+      <div>
+        <p>
+          {{ quiz.description }}
+        </p>
       </div>
-      <mat-error
-        *ngIf="selectsField.at(i)?.touched && selectsField.controls[i].errors"
-      >
-        This question is required
-      </mat-error>
     </mat-radio-group>
   </mat-card>
 
-  <button
-    type="submit"
-    class="btn__form"
-    mat-raised-button
-    color="primary"
-    [disabled]="form.invalid"
-  >
-    send
-  </button>
-</form>
+  <form [formGroup]="form" (ngSubmit)="saveForm()">
+    <mat-card
+      class="card"
+      formArrayName="selects"
+      *ngFor="let question of quiz.questions; let i = index"
+    >
+      <mat-card-title>
+        <h4>{{ question.title }} *</h4>
+      </mat-card-title>
+      <mat-radio-group class="options" [formControlName]="i">
+        <div *ngFor="let answer of question.answers">
+          <mat-radio-button [value]="answer.text">
+            {{ answer.text }}
+          </mat-radio-button>
+        </div>
+        <mat-error
+          *ngIf="selectsField.at(i)?.touched && selectsField.controls[i].errors"
+        >
+          This question is required
+        </mat-error>
+      </mat-radio-group>
+    </mat-card>
+
+    <button
+      type="submit"
+      class="btn__form"
+      mat-raised-button
+      color="primary"
+      [disabled]="form.invalid"
+    >
+      send quiz
+    </button>
+  </form>
+
+  <div class="alert" [class.show]="alert.show">
+    <mat-icon>warning</mat-icon>
+    <div>{{ alert.message }}</div>
+  </div>
+</div>

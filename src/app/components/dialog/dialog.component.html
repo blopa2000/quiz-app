@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Please enter your data</h1>
+<div mat-dialog-content class="content__dialog">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input type="text" matInput [formControl]="name" />
+    <mat-error *ngIf="name.touched && name.hasError('required')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput [formControl]="email" />
+    <mat-error *ngIf="email.touched && email.hasError('required')">
+      Email is required
+    </mat-error>
+
+    <mat-error *ngIf="email.hasError('email')">
+      Please enter a valid email address</mat-error
+    >
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="saveForm()">
+    save my data
+  </button>
+</div>

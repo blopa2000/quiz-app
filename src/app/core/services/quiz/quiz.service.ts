@@ -38,6 +38,7 @@ export class QuizService {
       const res = await getDoc(doc(this.firestore, 'quizzes', quizID));
       return res.data();
     } catch (error) {
+      console.error(error);
       return error;
     }
   }
@@ -52,25 +53,55 @@ export class QuizService {
       );
       return res;
     } catch (error) {
+      console.error(error);
       return error;
     }
   }
 
   async saveResult(
     quizID: string,
-    userUID: string,
-    results: { name: string; result: string }
+    userUID: string | undefined,
+    results: { name: string; result: string; email: string }
   ) {
     try {
-      const res = await setDoc(
-        doc(this.firestore, 'quizzes', quizID, 'userResults', userUID),
-        {
-          ...results,
+      if (userUID !== undefined) {
+        const res = await setDoc(
+          doc(this.firestore, 'quizzes', quizID, 'userResults', userUID),
+          {
+            ...results,
+            hasProfile: true,
+          }
+        );
+      } else {
+        const findUser = await getDocs(
+          query(
+            collection(this.firestore, 'quizzes', quizID, 'userResults'),
+            where('email', '==', results.email)
+          )
+        );
+        if (findUser.empty) {
+          const res = await addDoc(
+            collection(this.firestore, 'quizzes', quizID, 'userResults'),
+            {
+              ...results,
+              hasProfile: false,
+            }
+          );
+        } else {
+          return {
+            state: false,
+            message: 'This user has already taken the quiz',
+          };
         }
-      );
-      return true;
+      }
+
+      return {
+        state: true,
+        message: 'Done',
+      };
     } catch (error) {
-      return error;
+      console.error(error);
+      return { state: false, message: 'Error taking the exam' };
     }
   }
 }

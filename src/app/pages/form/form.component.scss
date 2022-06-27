@@ -4,6 +4,15 @@
   align-items: center;
   flex-direction: column;
   margin-bottom: 50px;
+  position: relative;
+
+  .spinner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 500px;
+    align-items: center;
+  }
 
   form {
     margin-bottom: 50px;
@@ -34,6 +43,25 @@
     &[disabled] {
       background-color: #cccccc;
       color: #666666;
+    }
+  }
+
+  .alert {
+    position: fixed;
+    top: 80px;
+    right: 0px;
+    display: flex;
+    padding: 10px;
+    margin-right: 1%;
+    background: #d81f69;
+    border-radius: 5px;
+    color: #fff;
+    align-items: center;
+    transform: translateX(150%);
+    transition: all 0.5s ease-in-out;
+
+    &.show {
+      transform: translateX(0);
     }
   }
 }
