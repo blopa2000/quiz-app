@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Quiz } from '@models/quiz.model';
 import { QuizService } from '@services/quiz/quiz.service';
 import {
@@ -38,7 +38,8 @@ export class FormComponent implements OnInit {
   };
 
   constructor(
-    private Router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private quizService: QuizService,
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -49,10 +50,12 @@ export class FormComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.Router.paramMap.subscribe(async (params) => {
+    this.route.paramMap.subscribe(async (params) => {
       const id = params.get('quizID');
 
       const res = await this.quizService.getQuiz(id);
+      if (res === undefined) this.router.navigate(['home']);
+
       this.quiz = { ...res, id };
 
       for (const iterator of this.quiz.questions) {
@@ -96,7 +99,14 @@ export class FormComponent implements OnInit {
       );
 
       if (res.state) {
-        console.log('redireccionar');
+        this.router.navigate(['result'], {
+          queryParams: {
+            ...dto,
+            existProfile: this.user.uid ? 'y' : 'n',
+            quizTitle: this.quiz.title,
+          },
+          queryParamsHandling: 'merge',
+        });
       } else {
         this.alert = {
           show: true,

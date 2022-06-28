@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  &::ng-deep.mat-card{
+    width: 50%;
+    text-align: center;
+
+    .results {
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      h3 {
+        margin: 10px 0;
+      }
+      span {
+        color: #C2185B;
+        margin-left:10px;
+      }
+    }
+
+    p {
+      background: #d81f69;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 15px;
+      opacity: .5;
+    }
+
+    @media (max-width: 670px) {
+      width: 100%;
+      margin: 10px;
+    }
+  }
+}

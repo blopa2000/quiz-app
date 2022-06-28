@@ -11,33 +11,37 @@
   </button>
   <span>Quiz App</span>
   <span class="spacer"></span>
-  <button
-    routerLink="home"
-    matTooltip="home"
-    mat-icon-button
-    aria-label="home icon"
-    routerLinkActive="active"
-  >
-    <mat-icon>home</mat-icon>
-  </button>
 
-  <button
-    [routerLink]="['profile', user.uid, 'my-list']"
-    mat-icon-button
-    matTooltip="profile"
-    aria-label="share icon"
-    routerLinkActive="active"
-  >
-    <mat-icon>person</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    matTooltip="exit"
-    aria-label="exit icon"
-    (click)="exit()"
-  >
-    <mat-icon>exit_to_app</mat-icon>
-  </button>
+  <div *ngIf="user?.uid?.length">
+    <button
+      routerLink="home"
+      matTooltip="home"
+      mat-icon-button
+      aria-label="home icon"
+      routerLinkActive="active"
+    >
+      <mat-icon>home</mat-icon>
+    </button>
+
+    <button
+      [routerLink]="['profile', user.uid, 'my-list']"
+      mat-icon-button
+      matTooltip="profile"
+      aria-label="share icon"
+      routerLinkActive="active"
+    >
+      <mat-icon>person</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matTooltip="exit"
+      aria-label="exit icon"
+      *ngIf="!isForm"
+      (click)="exit()"
+    >
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
 <div class="toolbar__space"></div>
 <router-outlet></router-outlet>

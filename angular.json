@@ -115,9 +115,21 @@
             "firebaseProject": "quiz-67c39",
             "firebaseHostingSite": "quiz-67c39"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "quiz"
+  "defaultProject": "quiz",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

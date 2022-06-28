@@ -23,6 +23,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FormComponent } from './pages/form/form.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { ResultsComponent } from './pages/results/results.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     SignInComponent,
     SignUpComponent,
     DialogComponent,
+    ResultsComponent,
   ],
   imports: [
     BrowserModule,

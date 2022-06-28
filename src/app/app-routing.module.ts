@@ -5,6 +5,7 @@ import { FormComponent } from './pages/form/form.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { ResultsComponent } from './pages/results/results.component';
 
 import { AccessGuard } from '@guards/access/access.guard';
 
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'quiz/:userUID/:quizID',
         component: FormComponent,
+      },
+      {
+        path: 'result',
+        component: ResultsComponent,
       },
     ],
   },

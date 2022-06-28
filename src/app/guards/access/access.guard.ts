@@ -30,6 +30,8 @@ export class AccessGuard implements CanActivate {
     | UrlTree {
     return new Promise((resolve, reject) => {
       onAuthStateChanged(this.auth, (currentUser) => {
+        console.log(currentUser);
+
         if (currentUser) {
           this.userService.addUserStore({
             uid: currentUser.uid,

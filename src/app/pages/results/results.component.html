@@ -1,0 +1,44 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1>Quiz results</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="results">
+      <h3>Quiz title:</h3>
+      <span>{{ data.quizTitle }}</span>
+    </div>
+
+    <div class="results">
+      <h3>Result:</h3>
+      <span>{{ data.result }}</span>
+    </div>
+
+    <div class="results">
+      <h3>Name:</h3>
+      <span>{{ data.name }}</span>
+    </div>
+
+    <div class="results">
+      <h3>Email:</h3>
+      <span>{{ data.email }}</span>
+    </div>
+
+    <div *ngIf="data.existProfile == 'y'; else noProfile">
+      <button mat-raised-button color="primary" routerLink="/home">
+        Come back
+      </button>
+    </div>
+
+    <ng-template #noProfile>
+      <p>
+        If you want to take more of our quizzes, we suggest you sign up so you
+        can create and take many more quizzes.
+      </p>
+      <button mat-raised-button color="primary" routerLink="/register">
+        Sign up
+      </button>
+    </ng-template>
+  </mat-card-content>
+</mat-card>
