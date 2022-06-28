@@ -55,4 +55,11 @@ export class CardQuizComponent implements OnInit {
   transformUrlshated(id: string | undefined, userUID: string) {
     return `quiz/${userUID}/${id}`;
   }
+
+  async deleteQuiz(quizID: string, index: number) {
+    const res = await this.quizService.deleteQuiz(quizID);
+    if (res) {
+      this.quizzes.splice(index, 1);
+    }
+  }
 }

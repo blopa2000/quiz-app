@@ -58,6 +58,15 @@ export class QuizService {
     }
   }
 
+  async deleteQuiz(quizID: string): Promise<true | undefined | any> {
+    try {
+      const res = await deleteDoc(doc(this.firestore, 'quizzes', quizID));
+      return true;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async saveResult(
     quizID: string,
     userUID: string | undefined,

@@ -1,11 +1,14 @@
-<mat-card (click)="goForm(quiz.id, quiz.userUID)" *ngFor="let quiz of quizzes">
+<mat-card
+  (click)="goForm(quiz.id, quiz.userUID)"
+  *ngFor="let quiz of quizzes; let i = index"
+>
   <div class="menu__card" *ngIf="isProfile">
     <button appStopPropagation mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>edit</button>
-      <button mat-menu-item>delete</button>
+      <button mat-menu-item (click)="deleteQuiz(quiz.id, i)">delete</button>
       <a mat-menu-item [routerLink]="['..', 'detail', quiz.id]">detail</a>
     </mat-menu>
   </div>
