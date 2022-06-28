@@ -4,4 +4,25 @@
   &::ng-deep.mat-table {
     width: 100%;
   }
+
+  @media (max-width: 700px) {
+    width: 96%;
+    margin: 10px;
+    .container__table {
+      overflow: scroll;
+    }
+  }
+
+  .mat-table {
+    min-width: 600px;
+  }
+
+  .message {
+    font-size: 27px;
+    text-align: center;
+    font-weight: bold;
+    p {
+      opacity: 0.5;
+    }
+  }
 }

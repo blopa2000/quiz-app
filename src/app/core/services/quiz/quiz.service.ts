@@ -9,9 +9,9 @@ import {
   getDoc,
   doc,
   setDoc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { Quiz } from '@models/quiz.model';
-import { promises } from 'dns';
 
 @Injectable({
   providedIn: 'root',
@@ -102,6 +102,16 @@ export class QuizService {
     } catch (error) {
       console.error(error);
       return { state: false, message: 'Error taking the exam' };
+    }
+  }
+
+  async deleteUSerResult(userID: string, quizID: string) {
+    try {
+      await deleteDoc(
+        doc(this.firestore, 'quizzes', quizID, 'userResults', userID)
+      );
+    } catch (error) {
+      console.error(error);
     }
   }
 }
