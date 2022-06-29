@@ -19,7 +19,25 @@ export class SignInComponent implements OnInit {
         password: '123456789',
       })
       .then((user) => {
-        this.router.navigate(['home']);
+        console.log(user);
+
+        // this.router.navigate(['home']);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  //si es la solucion al error mas estraño de este proyecto por que no tengo idea
+  si() {
+    console.log('hola');
+    this.authServices
+      .signIn({
+        email: 'jpagudelo@gmail.com',
+        password: '123456789',
+      })
+      .then((user) => {
+        console.log(user);
+
+        // this.router.navigate(['home']);
       })
       .catch((error) => console.log(error));
   }
