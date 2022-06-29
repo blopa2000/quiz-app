@@ -5,7 +5,7 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 
 import { SidebarComponent } from '@components/sidebar/sidebar.component';
-import { CreateQuizComponent } from '@components/create-quiz/create-quiz.component';
+import { FormQuizComponent } from '@components/form-quiz/form-quiz.component';
 import { DetailQuizComponent } from '@components/detail-quiz/detail-quiz.component';
 
 import { MaterialUiModule } from '@material';
@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     ProfileComponent,
     SidebarComponent,
-    CreateQuizComponent,
+    FormQuizComponent,
     DetailQuizComponent,
   ],
   imports: [

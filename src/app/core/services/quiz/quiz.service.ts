@@ -10,6 +10,7 @@ import {
   doc,
   setDoc,
   deleteDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { Quiz } from '@models/quiz.model';
 
@@ -21,11 +22,23 @@ export class QuizService {
 
   async addQuiz(quiz: Quiz, userUID: string): Promise<boolean> {
     try {
-      const res = await addDoc(collection(this.firestore, 'quizzes'), {
+      await addDoc(collection(this.firestore, 'quizzes'), {
         ...quiz,
         userUID,
       });
 
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  async updateQuiz(quiz: Quiz, quizID: string): Promise<boolean> {
+    try {
+      await updateDoc(doc(this.firestore, 'quizzes', quizID), {
+        ...quiz,
+      });
       return true;
     } catch (error) {
       console.error(error);

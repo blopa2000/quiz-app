@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   FormBuilder,
@@ -13,13 +13,14 @@ import { UserExists } from '@models/user.model';
 
 import { QuizService } from '@services/quiz/quiz.service';
 import { UserService } from '@services/user/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-quiz',
-  templateUrl: './create-quiz.component.html',
-  styleUrls: ['./create-quiz.component.scss'],
+  selector: 'app-form-quiz',
+  templateUrl: './form-quiz.component.html',
+  styleUrls: ['./form-quiz.component.scss'],
 })
-export class CreateQuizComponent {
+export class FormQuizComponent implements OnInit {
   form!: FormGroup;
   titleQustionField = new FormControl('', [Validators.required]);
   answerTextFiled = new FormControl('');
@@ -33,16 +34,36 @@ export class CreateQuizComponent {
     message: '',
   };
 
+  title: string = '';
+  description: string = '';
+  quizID: string = '';
+
   constructor(
     private formBuilder: FormBuilder,
     private quizService: QuizService,
     private userService: UserService,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.buildForm();
 
     this.userService.user$.subscribe((user) => {
       this.user = user;
+    });
+  }
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(async (params: any): Promise<any> => {
+      if (params.params.id) {
+        const res = await this.quizService.getQuiz(params.params.id);
+        if (res === undefined) return this.router.navigate(['home']);
+
+        this.titleField?.setValue(res.title);
+        this.descriptionField?.setValue(res.description);
+        this.questions = res.questions;
+        this.quizID = params.params.id;
+      }
     });
   }
 
@@ -66,24 +87,45 @@ export class CreateQuizComponent {
           ...question.answers.filter((answer) => answer.isCorrect === true)
         );
       }
-      const res = await this.quizService.addQuiz(
-        {
-          title: this.titleField?.value,
-          description: this.descriptionField?.value,
-          questions: this.questions,
-          correctAnswers,
-        },
-        this.user.uid
-      );
+      if (this.quizID.length === 0) {
+        const addQuiz = await this.quizService.addQuiz(
+          {
+            title: this.titleField?.value,
+            description: this.descriptionField?.value,
+            questions: this.questions,
+            correctAnswers,
+          },
+          this.user.uid
+        );
 
-      if (res) {
-        return this.location.back();
+        if (addQuiz) {
+          return this.location.back();
+        }
+
+        this.alertAnswer = {
+          show: true,
+          message: 'Error creating quiz',
+        };
+      } else {
+        const updateQuiz = await this.quizService.updateQuiz(
+          {
+            title: this.titleField?.value,
+            description: this.descriptionField?.value,
+            questions: this.questions,
+            userUID: this.user.uid,
+            correctAnswers,
+          },
+          this.quizID
+        );
+        if (updateQuiz) {
+          return this.location.back();
+        }
+
+        this.alertAnswer = {
+          show: true,
+          message: 'Error updating quiz',
+        };
       }
-
-      this.alertAnswer = {
-        show: true,
-        message: 'Error creating quiz',
-      };
     } else {
       this.form.markAllAsTouched();
     }

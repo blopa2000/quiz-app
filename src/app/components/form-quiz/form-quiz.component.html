@@ -138,6 +138,6 @@
     [disabled]="form.invalid"
     (click)="saveQuiz()"
   >
-    Save quiz
+    {{ quizID.length > 0 ? "Edit quiz" : "Create quiz" }}
   </button>
 </div>

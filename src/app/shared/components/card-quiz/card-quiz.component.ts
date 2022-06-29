@@ -49,10 +49,10 @@ export class CardQuizComponent implements OnInit {
   }
 
   goForm(id: string | undefined, userUID: string) {
-    this.router.navigate([this.transformUrlshated(id, userUID)]);
+    this.router.navigate([this.transformUrlshared(id, userUID)]);
   }
 
-  transformUrlshated(id: string | undefined, userUID: string) {
+  transformUrlshared(id: string | undefined, userUID: string) {
     return `quiz/${userUID}/${id}`;
   }
 
