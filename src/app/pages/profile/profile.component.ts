@@ -13,6 +13,8 @@ export class ProfileComponent implements OnInit {
     name: '',
     avatar: '',
   };
+  uid: string | null = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -22,6 +24,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(async (params) => {
       this.user = await this.userService.getUser(params.get('id'));
+      this.uid = params.get('id');
       if (this.user === undefined) {
         this.router.navigate(['home']);
       }

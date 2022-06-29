@@ -1,7 +1,10 @@
 :host {
   .btn__menu {
     margin-left: 90%;
-    @media (min-width: 1250px) {
+  }
+  
+  @media (min-width: 1250px) {
+    .btn__close {
       display: none;
     }
   }
@@ -42,6 +45,7 @@
           width: 100px;
           height: 100px;
           border-radius: 50%;
+          object-fit: cover;
         }
       }
 

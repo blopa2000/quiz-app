@@ -1,0 +1,47 @@
+:host {
+  .file {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    margin: auto;
+
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit:cover
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    label {
+      color: #ffffff80;
+      background-color: #0000005e;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 100%;
+
+      .mat-icon {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .mat-form-field {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .mat-dialog-actions {
+    justify-content: space-between;
+  }
+}

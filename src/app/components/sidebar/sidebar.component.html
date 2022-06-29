@@ -3,18 +3,27 @@
     <button
       mat-icon-button
       aria-label="close icon"
-      class="btn__menu"
+      class="btn__menu btn__close"
+      matTooltip="close"
+      color="primary"
       (click)="toggleSidebar()"
     >
       <mat-icon>close</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="btn__menu"
+      aria-label="settings icon"
+      matTooltip="settings"
+      (click)="openDialog()"
+    >
+      <mat-icon>settings</mat-icon>
     </button>
     <div class="sidebar__content__header">
       <div class="avatar">
         <img
           [src]="
-            user?.avatar == ''
-              ? 'https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg'
-              : user?.avatar
+            user?.avatar.length === 0 ? 'assets/img/default.jpg' : user?.avatar
           "
           alt="avatar"
         />

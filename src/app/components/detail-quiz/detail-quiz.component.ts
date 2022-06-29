@@ -33,7 +33,7 @@ export class DetailQuizComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.paramMap.subscribe(async (params: any) => {
       this.unsubscribe = onSnapshot(
-        collection(this.firestore, 'quizzes', params.params.id, 'userResults'),
+        collection(this.firestore, 'quizzes', params.get('id'), 'userResults'),
         (snapshot) => {
           snapshot.docChanges().forEach((result) => {
             if (result.type === 'removed') {
@@ -45,7 +45,7 @@ export class DetailQuizComponent implements OnInit, OnDestroy {
               this.listUsers.push({
                 ...result.doc.data(),
                 userID: result.doc.id,
-                quizID: params.params.id,
+                quizID: params.get('id'),
               });
             }
           });
