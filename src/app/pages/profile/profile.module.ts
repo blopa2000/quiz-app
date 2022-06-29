@@ -7,6 +7,7 @@ import { ProfileComponent } from './profile.component';
 import { SidebarComponent } from '@components/sidebar/sidebar.component';
 import { FormQuizComponent } from '@components/form-quiz/form-quiz.component';
 import { DetailQuizComponent } from '@components/detail-quiz/detail-quiz.component';
+import { SettingDialogComponent } from '@components/setting-dialog/setting-dialog.component';
 
 import { MaterialUiModule } from '@material';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SidebarComponent,
     FormQuizComponent,
     DetailQuizComponent,
+    SettingDialogComponent,
   ],
   imports: [
     CommonModule,

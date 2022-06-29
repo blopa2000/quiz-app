@@ -3,10 +3,21 @@
     <button
       mat-icon-button
       aria-label="close icon"
-      class="btn__menu"
+      class="btn__menu btn__close"
+      matTooltip="close"
+      color="primary"
       (click)="toggleSidebar()"
     >
       <mat-icon>close</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="btn__menu"
+      aria-label="settings icon"
+      matTooltip="settings"
+      (click)="openDialog()"
+    >
+      <mat-icon>settings</mat-icon>
     </button>
     <div class="sidebar__content__header">
       <div class="avatar">

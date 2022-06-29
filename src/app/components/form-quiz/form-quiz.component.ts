@@ -55,14 +55,14 @@ export class FormQuizComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(async (params: any): Promise<any> => {
-      if (params.params.id) {
-        const res = await this.quizService.getQuiz(params.params.id);
+      if (params.get('id')) {
+        const res = await this.quizService.getQuiz(params.get('id'));
         if (res === undefined) return this.router.navigate(['home']);
 
         this.titleField?.setValue(res.title);
         this.descriptionField?.setValue(res.description);
         this.questions = res.questions;
-        this.quizID = params.params.id;
+        this.quizID = params.get('id');
       }
     });
   }
@@ -87,11 +87,14 @@ export class FormQuizComponent implements OnInit {
           ...question.answers.filter((answer) => answer.isCorrect === true)
         );
       }
+
+      const { title, description } = this.form.value;
+
       if (this.quizID.length === 0) {
         const addQuiz = await this.quizService.addQuiz(
           {
-            title: this.titleField?.value,
-            description: this.descriptionField?.value,
+            title,
+            description,
             questions: this.questions,
             correctAnswers,
           },
@@ -109,8 +112,8 @@ export class FormQuizComponent implements OnInit {
       } else {
         const updateQuiz = await this.quizService.updateQuiz(
           {
-            title: this.titleField?.value,
-            description: this.descriptionField?.value,
+            title,
+            description,
             questions: this.questions,
             userUID: this.user.uid,
             correctAnswers,
