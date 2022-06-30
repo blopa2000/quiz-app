@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -6,20 +7,14 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
+import { onAuthStateChanged } from '@firebase/auth';
 import { Observable } from 'rxjs';
-import { Auth, onAuthStateChanged } from '@angular/fire/auth';
-import { UserService } from '@services/user/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AccessGuard implements CanActivate {
-  constructor(
-    private auth: Auth,
-    private router: Router,
-    private userService: UserService
-  ) {}
-
+export class ExistingUserGuard implements CanActivate {
+  constructor(private router: Router, private auth: Auth) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -31,14 +26,10 @@ export class AccessGuard implements CanActivate {
     return new Promise((resolve, reject) => {
       onAuthStateChanged(this.auth, (currentUser) => {
         if (currentUser) {
-          this.userService.addUserStore({
-            uid: currentUser.uid,
-            email: currentUser.email,
-          });
-          resolve(true);
-        } else {
-          this.router.navigate(['entry']);
+          this.router.navigate(['home']);
           resolve(false);
+        } else {
+          resolve(true);
         }
       });
     });

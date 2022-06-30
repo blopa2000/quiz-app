@@ -7,6 +7,7 @@ import { SignInAndSignUpComponent } from './pages/sign-in-and-sign-up/sign-in-an
 import { ResultsComponent } from './pages/results/results.component';
 
 import { AccessGuard } from '@guards/access/access.guard';
+import { ExistingUserGuard } from '@guards/existingUser/existing-user.guard';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
   {
     path: 'entry',
     component: SignInAndSignUpComponent,
+    canActivate: [ExistingUserGuard],
   },
   {
     path: '**',
