@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '@services/auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '@services/user/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogForgotPasswordComponent } from '@components/dialog-forgot-password/dialog-forgot-password.component';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in-and-sign-up.component.html',
@@ -15,7 +17,8 @@ export class SignInAndSignUpComponent {
     private authServices: AuthService,
     private userService: UserService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) {
     this.buildForm();
   }
@@ -41,36 +44,36 @@ export class SignInAndSignUpComponent {
         console.log(error.code);
 
         if (error.code === 'auth/invalid-email') {
-          this.alert = {
+          this.openAlert({
             status: true,
             type: 'error',
             message: 'Invalid email',
-          };
+          });
         } else if (error.code === 'auth/weak-password') {
-          this.alert = {
+          this.openAlert({
             status: true,
             type: 'error',
             message: 'Weak password',
-          };
+          });
         } else if (error.code === 'auth/user-not-found') {
-          this.alert = {
+          this.openAlert({
             status: true,
             type: 'error',
             message: 'User not found',
-          };
+          });
         } else if (error.code === 'auth/wrong-password') {
-          this.alert = {
+          this.openAlert({
             status: true,
             type: 'error',
             message: 'Wrong password',
-          };
+          });
         } else {
-          this.alert = { status: true, type: 'error', message: error.message };
+          this.openAlert({
+            status: true,
+            type: 'error',
+            message: error.message,
+          });
         }
-
-        setTimeout(() => {
-          this.alert.status = false;
-        }, 3000);
       }
     } else {
       this.loginForm.markAllAsTouched();
@@ -86,17 +89,18 @@ export class SignInAndSignUpComponent {
         const user = await this.userService.addUser(name, res.user.uid);
       } catch (error: any) {
         if (error.code === 'auth/email-already-in-use') {
-          this.alert = {
+          this.openAlert({
             status: true,
             type: 'error',
             message: 'Email already in use',
-          };
+          });
         } else {
-          this.alert = { status: true, type: 'error', message: error.message };
+          this.openAlert({
+            status: true,
+            type: 'error',
+            message: error.message,
+          });
         }
-        setTimeout(() => {
-          this.alert.status = false;
-        }, 3000);
       }
     } else {
       this.logupForm.markAllAsTouched();
@@ -114,6 +118,41 @@ export class SignInAndSignUpComponent {
       name: ['', [Validators.required]],
       password: ['', [Validators.required, , Validators.minLength(9)]],
     });
+  }
+
+  openDialogforgotPassword() {
+    const dialogRef = this.dialog.open(DialogForgotPasswordComponent, {
+      width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.openAlert({
+          status: true,
+          type: 'check_circle',
+          message: 'We send you an email to recover your password',
+        });
+      }
+    });
+  }
+
+  openAlert({
+    status,
+    message,
+    type,
+  }: {
+    status: boolean;
+    type: string;
+    message: string;
+  }) {
+    this.alert = {
+      status,
+      type,
+      message,
+    };
+    setTimeout(() => {
+      this.alert.status = false;
+    }, 3000);
   }
 
   //login

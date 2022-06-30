@@ -23,6 +23,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { FormComponent } from './pages/form/form.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ResultsComponent } from './pages/results/results.component';
+import { DialogForgotPasswordComponent } from './components/dialog-forgot-password/dialog-forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ResultsComponent } from './pages/results/results.component';
     SignInAndSignUpComponent,
     DialogComponent,
     ResultsComponent,
+    DialogForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -33,8 +33,17 @@
             at least <strong>9</strong> characters
           </mat-error>
         </mat-form-field>
+        <p class="forgotPassword">
+          did you forget your password?
+          <span (click)="openDialogforgotPassword()">click here</span>
+        </p>
 
-        <button mat-raised-button color="primary" (click)="signIn($event)">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="signIn($event)"
+        >
           Login
         </button>
       </form>
@@ -120,7 +129,7 @@
 
 <div class="container-alert">
   <div class="alert" [class.show]="alert.status">
-    <mat-icon>error</mat-icon>
+    <mat-icon>{{ alert.type }}</mat-icon>
     <span> {{ alert.message }} </span>
   </div>
 </div>

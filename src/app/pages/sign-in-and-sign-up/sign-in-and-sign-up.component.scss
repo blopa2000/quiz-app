@@ -51,11 +51,23 @@
 
     .sign-in-form {
       z-index: 2;
+      .forgotPassword {
+        font-weight: 300;
+        span {
+          font-weight: bold;
+          font-size: 15px;
+          color: rgb(68, 180, 255);
+          cursor: pointer;
+        }
+      }
     }
 
     .sign-up-form {
       z-index: 1;
       opacity: 0;
+      button {
+        margin-top: 20px;
+      }
     }
 
     .title {
@@ -280,6 +292,28 @@
 @media (max-width: 570px) {
   form {
     padding: 0 1.5rem !important;
+  }
+  .sign-in-form {
+    margin-top: 135px;
+  }
+
+  .sign-up-form {
+    margin-bottom: 60px;
+  }
+
+  .right-panel {
+    padding-top: 0 !important;
+  }
+
+  .left-panel .content,
+  .right-panel .container {
+    padding: 0 !important;
+  }
+
+  .right-panel {
+    p {
+      padding: 0 !important;
+    }
   }
 }
 
