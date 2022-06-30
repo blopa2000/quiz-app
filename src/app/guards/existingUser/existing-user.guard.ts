@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import {
   ActivatedRouteSnapshot,
@@ -14,7 +14,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ExistingUserGuard implements CanActivate {
-  constructor(private router: Router, private auth: Auth) {}
+  constructor(
+    private router: Router,
+    private auth: Auth,
+    private ngZone: NgZone
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -26,7 +30,7 @@ export class ExistingUserGuard implements CanActivate {
     return new Promise((resolve, reject) => {
       onAuthStateChanged(this.auth, (currentUser) => {
         if (currentUser) {
-          this.router.navigate(['home']);
+          this.ngZone.run(() => this.router.navigate(['home']));
           resolve(false);
         } else {
           resolve(true);

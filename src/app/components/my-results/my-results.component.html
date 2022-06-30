@@ -1,4 +1,4 @@
-<div class="container__table" *ngIf="results.legnth !== 0; else emptyResult">
+<div class="container__table" *ngIf="results.length !== 0; else emptyResult">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>quiz</th>

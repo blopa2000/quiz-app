@@ -33,12 +33,10 @@ export class SignInAndSignUpComponent {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       try {
-        const res = await this.authServices.signIn({
+        await this.authServices.signIn({
           email,
           password,
         });
-
-        this.router.navigate(['home']);
       } catch (error: any) {
         console.log(error.code);
 
@@ -86,12 +84,6 @@ export class SignInAndSignUpComponent {
         const res = await this.authServices.register({ email, password });
 
         const user = await this.userService.addUser(name, res.user.uid);
-
-        if (user) {
-          this.router.navigate(['home']);
-        } else {
-          console.log('erorr');
-        }
       } catch (error: any) {
         if (error.code === 'auth/email-already-in-use') {
           this.alert = {
