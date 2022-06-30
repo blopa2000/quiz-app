@@ -1,4 +1,9 @@
-<h1>matematicas</h1>
+<p>
+  Quiz title:
+  <strong>
+    {{ title }}
+  </strong>
+</p>
 
 <div *ngIf="listUsers.length > 0; else noUser" class="container__table">
   <table mat-table [dataSource]="dataSource">

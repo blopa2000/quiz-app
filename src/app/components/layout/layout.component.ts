@@ -6,8 +6,6 @@ import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 
 import { StoreService } from '@services/store/store.service';
 import { AuthService } from '@services/auth/auth.service';
-import { UserService } from '@services/user/user.service';
-import { UserExists } from '@models/user.model';
 
 @Component({
   selector: 'app-layout',
@@ -29,7 +27,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private router: Router,
     private storeService: StoreService,
     private authService: AuthService,
-    private userService: UserService,
     private auth: Auth
   ) {
     this.isProfile = this.location.path().includes('profile');
@@ -44,12 +41,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.isForm = this.location.path().includes('quiz');
       });
 
-    onAuthStateChanged(this.auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(this.auth, (currentUser) => {
       this.user = {
         email: currentUser?.email,
         uid: currentUser?.uid,
       };
     });
+    unsubscribe();
   }
 
   toggleSidebar() {
@@ -62,7 +60,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   exit() {
     this.authService.logout().then(() => {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/entry']);
     });
   }
 }

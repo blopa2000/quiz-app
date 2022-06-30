@@ -39,7 +39,7 @@ export class AccessGuard implements CanActivate {
           });
           resolve(true);
         } else {
-          this.router.navigate(['login']);
+          this.router.navigate(['entry']);
           resolve(false);
         }
       });

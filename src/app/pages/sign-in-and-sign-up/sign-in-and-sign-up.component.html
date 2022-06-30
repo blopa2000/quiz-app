@@ -1,0 +1,126 @@
+<div class="container" [class.sign-up-mode]="addClass">
+  <div class="forms-container">
+    <div class="signin-signup">
+      <!-- 
+        LOGIN
+       -->
+      <form class="sign-in-form" [formGroup]="loginForm">
+        <h2 class="title">Login QuizApp</h2>
+        <mat-form-field class="input-field" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" />
+          <mat-hint>Errors appear instantly!</mat-hint>
+          <mat-error
+            *ngIf="
+              emailLoginFormControl?.hasError('email') &&
+              !emailLoginFormControl?.hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailLoginFormControl?.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="input-field" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password" />
+          <mat-hint>Errors appear instantly!</mat-hint>
+          <mat-error *ngIf="passwordLoginFormControl?.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="passwordLoginFormControl?.hasError('minlength')">
+            at least <strong>9</strong> characters
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="signIn($event)">
+          Login
+        </button>
+      </form>
+
+      <!-- 
+        Logup
+       -->
+      <form class="sign-up-form" [formGroup]="logupForm">
+        <h2 class="title">Register to QuizApp</h2>
+        <mat-form-field class="input-field" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" />
+          <mat-hint>Errors appear instantly!</mat-hint>
+          <mat-error
+            *ngIf="
+              emailLogupFormControl?.hasError('email') &&
+              !emailLogupFormControl?.hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailLogupFormControl?.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-field" appearance="fill">
+          <mat-label>Name</mat-label>
+          <input type="text" matInput formControlName="name" />
+          <mat-hint>Errors appear instantly!</mat-hint>
+          <mat-error *ngIf="nameLogupFormControl?.hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-field" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password" />
+
+          <mat-error *ngIf="passwordLogupFormControl?.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+
+          <mat-error *ngIf="passwordLogupFormControl?.hasError('minlength')">
+            At least <strong>9</strong> characters
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="signUp($event)">
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <div>
+          <h3>New in QuizApp?</h3>
+          <p>Register and start creating new quizzes</p>
+          <button class="btn transparent" (click)="addClass = !addClass">
+            Register
+          </button>
+        </div>
+        <img src="assets/img/login.svg" class="image" alt="" />
+      </div>
+    </div>
+
+    <div class="panel right-panel">
+      <div class="content">
+        <div>
+          <h3>You have an account?</h3>
+          <p>Login to take more of our quizzes</p>
+          <button class="btn transparent" (click)="addClass = !addClass">
+            Login
+          </button>
+        </div>
+        <img src="assets/img/logup.svg" class="image" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-alert">
+  <div class="alert" [class.show]="alert.status">
+    <mat-icon>error</mat-icon>
+    <span> {{ alert.message }} </span>
+  </div>
+</div>

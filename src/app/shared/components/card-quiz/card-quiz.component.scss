@@ -1,14 +1,17 @@
 :host {
   width: 80%;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
   &::ng-deep.mat-card {
     margin: 10px;
     transition: all 0.3s ease-in-out;
     position: relative;
     max-width: 300px;
+    min-width: 300px;
+    @media (max-width: 400px) {
+      min-width: 85%;
+      margin: 10px 1px;
+    }
     &::ng-deep.mat-card-header-text {
       font-size: 1.2rem;
     }
@@ -29,5 +32,22 @@
 
   @media (max-width: 1000px) {
     width: 100%;
+  }
+
+  .empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0.5;
+    h3 {
+      font-size: 30px;
+    }
+    img {
+      width: 400px;
+      @media (max-width: 500px) {
+        width: 90%;
+      }
+    }
   }
 }

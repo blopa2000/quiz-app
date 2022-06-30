@@ -14,6 +14,7 @@ import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '@components/dialog/dialog.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -44,7 +45,8 @@ export class FormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private auth: Auth,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private location: Location
   ) {
     this.buildForm();
   }
@@ -63,7 +65,7 @@ export class FormComponent implements OnInit {
       }
     });
 
-    onAuthStateChanged(this.auth, async (currentuser) => {
+    const unsubscribe = onAuthStateChanged(this.auth, async (currentuser) => {
       if (currentuser) {
         const res = await this.userService.getUser(currentuser.uid);
         this.user = {
@@ -72,9 +74,12 @@ export class FormComponent implements OnInit {
           ...res,
         };
       } else {
-        this.openDialog();
+        if (this.location.path().includes('quiz')) {
+          this.openDialog();
+        }
       }
     });
+    unsubscribe();
   }
 
   async saveForm() {
@@ -87,6 +92,7 @@ export class FormComponent implements OnInit {
           counter++;
         }
       }
+      //result => quiz
       const dto = {
         name: this.user.name,
         result: `${counter}/${this.quiz.correctAnswers.length}`,
@@ -98,7 +104,18 @@ export class FormComponent implements OnInit {
         dto
       );
 
-      if (res.state) {
+      //result => user
+      const resultUser = await this.userService.addResult(
+        this.user.uid,
+        this.quiz.id,
+        {
+          title: this.quiz.title,
+          result: dto.result,
+          url: this.location.path(),
+        }
+      );
+
+      if (res.state && resultUser) {
         this.router.navigate(['result'], {
           queryParams: {
             ...dto,

@@ -1,33 +1,50 @@
-<mat-card
-  (click)="goForm(quiz.id, quiz.userUID)"
-  *ngFor="let quiz of quizzes; let i = index"
->
-  <div class="menu__card" *ngIf="isProfile">
-    <button appStopPropagation mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item [routerLink]="['..', 'edit', quiz.id]">edit</button>
-      <button mat-menu-item (click)="deleteQuiz(quiz.id, i)">delete</button>
-      <a mat-menu-item [routerLink]="['..', 'detail', quiz.id]">detail</a>
-    </mat-menu>
+<ngx-masonry>
+  <mat-card
+    ngxMasonryItem
+    (click)="goForm(quiz.id, quiz.userUID)"
+    *ngFor="let quiz of quizzes; let i = index"
+  >
+    <div class="menu__card" *ngIf="isProfile">
+      <button appStopPropagation mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['..', 'edit', quiz.id]">
+          edit
+        </button>
+        <button mat-menu-item (click)="deleteQuiz(quiz.id, i)">delete</button>
+        <a mat-menu-item [routerLink]="['..', 'detail', quiz.id, quiz.title]"
+          >detail</a
+        >
+      </mat-menu>
+    </div>
+    <mat-card-header>
+      <mat-card-title>
+        <h1>
+          <span>{{ quiz.title }}</span>
+        </h1>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ quiz.description }}</p>
+      <button
+        *ngIf="isProfile"
+        appStopPropagation
+        mat-raised-button
+        matTooltip="Share this quiz"
+        color="primary"
+        (click)="copyUrl(transformUrlshared(quiz.id, quiz.userUID))"
+      >
+        <mat-icon>home</mat-icon>
+        Share url
+      </button>
+    </mat-card-content>
+  </mat-card>
+</ngx-masonry>
+
+<ng-container *ngIf="quizzes.length === 0 && isProfile">
+  <div class="empty">
+    <h3>You don't have quizzes, why don't you create one?</h3>
+    <img src="assets/img/empty.svg" alt="" />
   </div>
-  <mat-card-header>
-    <mat-card-title>
-      <h1>
-        <span>{{ quiz.title }}</span>
-      </h1>
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <p>{{ quiz.description }}</p>
-    <input
-      *ngIf="isProfile"
-      appStopPropagation
-      type="text"
-      name=""
-      id=""
-      [value]="transformUrlshared(quiz.id, quiz.userUID)"
-    />
-  </mat-card-content>
-</mat-card>
+</ng-container>

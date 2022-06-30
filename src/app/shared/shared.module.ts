@@ -6,9 +6,11 @@ import { CardQuizComponent } from './components/card-quiz/card-quiz.component';
 
 import { MaterialUiModule } from '@material';
 import { StopPropagationDirective } from './directives/stopPropagation/stop-propagation.directive';
+import { NgxMasonryModule } from 'ngx-masonry';
+
 @NgModule({
   declarations: [CardQuizComponent, StopPropagationDirective],
-  imports: [CommonModule, MaterialUiModule, RouterModule],
+  imports: [CommonModule, MaterialUiModule, RouterModule, NgxMasonryModule],
   exports: [CardQuizComponent],
 })
 export class SharedModule {}

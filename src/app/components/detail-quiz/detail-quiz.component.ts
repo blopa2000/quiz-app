@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { QuizService } from '@services/quiz/quiz.service';
@@ -22,6 +21,7 @@ export class DetailQuizComponent implements OnInit, OnDestroy {
   listUsers: any[] = [];
   dataSource: any;
   unsubscribe: any;
+  title: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +32,7 @@ export class DetailQuizComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(async (params: any) => {
+      this.title = params.get('title');
       this.unsubscribe = onSnapshot(
         collection(this.firestore, 'quizzes', params.get('id'), 'userResults'),
         (snapshot) => {

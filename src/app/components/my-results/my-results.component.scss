@@ -1,12 +1,7 @@
 :host {
   width: 70%;
   margin: 10px auto;
-  p {
-    font-size: 50px;
-    margin: 0;
-    text-transform: capitalize;
-    opacity: .7;
-  }
+
   &::ng-deep.mat-table {
     width: 100%;
   }
@@ -14,6 +9,7 @@
   @media (max-width: 700px) {
     width: 96%;
     margin: 10px;
+
     .container__table {
       overflow: scroll;
     }
@@ -27,8 +23,27 @@
     font-size: 27px;
     text-align: center;
     font-weight: bold;
+
     p {
       opacity: 0.5;
+    }
+  }
+
+  .empty-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: .5;
+    h3 {
+      font-size: 40px;
+    }
+    img {
+      width: 450px;
+      @media (max-width:500px) {
+        width: 90%;
+
+      }
     }
   }
 }

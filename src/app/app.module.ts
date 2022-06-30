@@ -18,8 +18,7 @@ import { AppComponent } from './app.component';
 import { LayoutComponent } from '@components/layout/layout.component';
 import { CompletedQuizComponent } from '@components/completed-quiz/completed-quiz.component';
 
-import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { SignInAndSignUpComponent } from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FormComponent } from './pages/form/form.component';
 import { DialogComponent } from './components/dialog/dialog.component';
@@ -32,8 +31,7 @@ import { ResultsComponent } from './pages/results/results.component';
     FormComponent,
     CompletedQuizComponent,
     LayoutComponent,
-    SignInComponent,
-    SignUpComponent,
+    SignInAndSignUpComponent,
     DialogComponent,
     ResultsComponent,
   ],

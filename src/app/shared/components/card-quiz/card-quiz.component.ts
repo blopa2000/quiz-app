@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { UserService } from '@services/user/user.service';
 import { QuizService } from '@services/quiz/quiz.service';
 import { UserExists } from '@models/user.model';
 import { Quiz } from '@models/quiz.model';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-card-quiz',
@@ -23,7 +24,8 @@ export class CardQuizComponent implements OnInit {
     private router: Router,
     private location: Location,
     private userService: UserService,
-    private quizService: QuizService
+    private quizService: QuizService,
+    @Inject(DOCUMENT) private document: Document
   ) {
     this.userService.user$.subscribe((user) => {
       this.user = user;
@@ -49,11 +51,12 @@ export class CardQuizComponent implements OnInit {
   }
 
   goForm(id: string | undefined, userUID: string) {
-    this.router.navigate([this.transformUrlshared(id, userUID)]);
+    this.router.navigate([`quiz/${userUID}/${id}`]);
   }
 
   transformUrlshared(id: string | undefined, userUID: string) {
-    return `quiz/${userUID}/${id}`;
+    const domain = this.document.location.href.split('/');
+    return `${domain[2]}/quiz/${userUID}/${id}`;
   }
 
   async deleteQuiz(quizID: string, index: number) {
@@ -61,5 +64,10 @@ export class CardQuizComponent implements OnInit {
     if (res) {
       this.quizzes.splice(index, 1);
     }
+  }
+
+  async copyUrl(url: string) {
+    await navigator.clipboard.writeText(url);
+    console.log('Page URL copied');
   }
 }

@@ -25,7 +25,7 @@
       <span>{{ data.email }}</span>
     </div>
 
-    <div *ngIf="data.existProfile == 'y'; else noProfile">
+    <div *ngIf="data.existProfile === 'y'; else noProfile">
       <button mat-raised-button color="primary" routerLink="/home">
         Come back
       </button>
@@ -36,7 +36,7 @@
         If you want to take more of our quizzes, we suggest you sign up so you
         can create and take many more quizzes.
       </p>
-      <button mat-raised-button color="primary" routerLink="/register">
+      <button mat-raised-button color="primary" routerLink="/entry">
         Sign up
       </button>
     </ng-template>

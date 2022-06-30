@@ -1,6 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  doc,
+  getDoc,
+  updateDoc,
+  getDocs,
+  collection,
+  QuerySnapshot,
+  DocumentData,
+} from '@angular/fire/firestore';
 import { UserExists } from '@models/user.model';
 import {
   Storage,
@@ -8,6 +17,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from '@angular/fire/storage';
+import { addDoc, setDoc } from '@firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +34,19 @@ export class UserService {
 
   addUserStore(user: UserExists) {
     this.user.next(Object.assign(user));
+  }
+
+  async addUser(name: string, uid: string) {
+    try {
+      await setDoc(doc(this.firestore, 'users', uid), {
+        name,
+        avatar: '',
+      });
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
   }
 
   async getUser(uid: string | any) {
@@ -57,6 +80,38 @@ export class UserService {
         name,
       });
 
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  async getMyResults(
+    uid: string
+  ): Promise<QuerySnapshot<DocumentData> | undefined | boolean> {
+    try {
+      const res = await getDocs(
+        collection(this.firestore, 'users', uid, 'myResults')
+      );
+      return res;
+    } catch (error) {
+      console.error(error);
+
+      return false;
+    }
+  }
+
+  async addResult(uid: string, quizID: string, result: any): Promise<boolean> {
+    try {
+      if (uid !== undefined) {
+        const res = await setDoc(
+          doc(this.firestore, 'users', uid, 'myResults', quizID),
+          {
+            ...result,
+          }
+        );
+      }
       return true;
     } catch (error) {
       console.error(error);
