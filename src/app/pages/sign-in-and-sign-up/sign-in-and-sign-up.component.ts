@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '@services/auth/auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '@services/user/user.service';
 import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { DialogForgotPasswordComponent } from '@components/dialog-forgot-password/dialog-forgot-password.component';
+
+import { AuthService } from '@services/auth/auth.service';
+import { UserService } from '@services/user/user.service';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in-and-sign-up.component.html',
@@ -12,24 +14,23 @@ import { DialogForgotPasswordComponent } from '@components/dialog-forgot-passwor
 })
 export class SignInAndSignUpComponent {
   addClass: boolean = false;
-
-  constructor(
-    private authServices: AuthService,
-    private userService: UserService,
-    private router: Router,
-    private formBuilder: FormBuilder,
-    public dialog: MatDialog
-  ) {
-    this.buildForm();
-  }
   loginForm!: FormGroup;
-  logupForm!: FormGroup;
+  signupForm!: FormGroup;
 
   alert = {
     status: false,
     message: '',
     type: 'error',
   };
+
+  constructor(
+    private authServices: AuthService,
+    private userService: UserService,
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
+  ) {
+    this.buildForm();
+  }
 
   async signIn(e: Event) {
     e.preventDefault();
@@ -81,9 +82,9 @@ export class SignInAndSignUpComponent {
   }
 
   async signUp(e: Event) {
-    if (this.logupForm.valid) {
+    if (this.signupForm.valid) {
       try {
-        const { email, password, name } = this.logupForm.value;
+        const { email, password, name } = this.signupForm.value;
         const res = await this.authServices.register({ email, password });
 
         const user = await this.userService.addUser(name, res.user.uid);
@@ -103,7 +104,7 @@ export class SignInAndSignUpComponent {
         }
       }
     } else {
-      this.logupForm.markAllAsTouched();
+      this.signupForm.markAllAsTouched();
     }
   }
 
@@ -113,7 +114,7 @@ export class SignInAndSignUpComponent {
       password: ['', [Validators.required, Validators.minLength(9)]],
     });
 
-    this.logupForm = this.formBuilder.group({
+    this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required]],
       password: ['', [Validators.required, , Validators.minLength(9)]],
@@ -165,17 +166,17 @@ export class SignInAndSignUpComponent {
     return this.loginForm.get('password');
   }
 
-  //logup
+  //signup
 
-  get emailLogupFormControl() {
-    return this.logupForm.get('email');
+  get emailsignupFormControl() {
+    return this.signupForm.get('email');
   }
 
-  get nameLogupFormControl() {
-    return this.logupForm.get('name');
+  get namesignupFormControl() {
+    return this.signupForm.get('name');
   }
 
-  get passwordLogupFormControl() {
-    return this.logupForm.get('password');
+  get passwordsignupFormControl() {
+    return this.signupForm.get('password');
   }
 }

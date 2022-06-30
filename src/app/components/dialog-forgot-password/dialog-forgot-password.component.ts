@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+
 import { AuthService } from '@services/auth/auth.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class DialogForgotPasswordComponent {
     Validators.required,
     Validators.email,
   ]);
+
   constructor(
     public dialogRef: MatDialogRef<DialogForgotPasswordComponent>,
     private authService: AuthService

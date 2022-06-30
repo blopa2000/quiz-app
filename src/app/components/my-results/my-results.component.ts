@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+
 import { UserExists } from '@models/user.model';
+
 import { UserService } from '@services/user/user.service';
 
 @Component({

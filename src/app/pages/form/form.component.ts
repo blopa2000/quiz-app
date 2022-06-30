@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Quiz } from '@models/quiz.model';
-import { QuizService } from '@services/quiz/quiz.service';
+import { Location } from '@angular/common';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
+import { MatDialog } from '@angular/material/dialog';
 import {
   FormArray,
   FormBuilder,
@@ -9,12 +10,13 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { UserService } from '@services/user/user.service';
-import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 
-import { MatDialog } from '@angular/material/dialog';
+import { Quiz } from '@models/quiz.model';
+
 import { DialogComponent } from '@components/dialog/dialog.component';
-import { Location } from '@angular/common';
+
+import { QuizService } from '@services/quiz/quiz.service';
+import { UserService } from '@services/user/user.service';
 
 @Component({
   selector: 'app-form',

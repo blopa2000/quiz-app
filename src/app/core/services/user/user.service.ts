@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { setDoc } from '@firebase/firestore';
 import {
   Firestore,
   doc,
@@ -10,14 +11,14 @@ import {
   QuerySnapshot,
   DocumentData,
 } from '@angular/fire/firestore';
-import { UserExists } from '@models/user.model';
 import {
   Storage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
 } from '@angular/fire/storage';
-import { addDoc, setDoc } from '@firebase/firestore';
+
+import { UserExists } from '@models/user.model';
 
 @Injectable({
   providedIn: 'root',

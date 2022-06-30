@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { UserService } from '@services/user/user.service';
-import { QuizService } from '@services/quiz/quiz.service';
+import { Location, DOCUMENT } from '@angular/common';
+
 import { UserExists } from '@models/user.model';
 import { Quiz } from '@models/quiz.model';
-import { DOCUMENT } from '@angular/common';
+
+import { UserService } from '@services/user/user.service';
+import { QuizService } from '@services/quiz/quiz.service';
 
 @Component({
   selector: 'app-card-quiz',
@@ -34,7 +35,7 @@ export class CardQuizComponent implements OnInit {
 
   async ngOnInit() {
     let operator: string = '';
-    if (this.location.path().split('/')[1] == 'profile') {
+    if (this.location.path().split('/')[1] === 'profile') {
       this.isProfile = true;
       operator = '==';
     } else {

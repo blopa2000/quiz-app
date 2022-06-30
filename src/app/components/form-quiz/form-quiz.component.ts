@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   FormControl,
 } from '@angular/forms';
-import { Location } from '@angular/common';
 
 import { Answer, Question } from '@models/quiz.model';
 import { UserExists } from '@models/user.model';
 
 import { QuizService } from '@services/quiz/quiz.service';
 import { UserService } from '@services/user/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-quiz',
@@ -141,13 +141,13 @@ export class FormQuizComponent implements OnInit {
     if (this.answers.length < 2)
       return (this.alertAnswer = {
         show: true,
-        message: 'must have at least 2 answers',
+        message: 'Must have at least 2 answers',
       });
 
     if (!this.isCorrectAnswer && this.isCorrectAnswer !== null)
       return (this.alertAnswer = {
         show: true,
-        message: 'you have to mark the correct answer',
+        message: 'You have to mark the correct answer',
       });
 
     this.questions.push({

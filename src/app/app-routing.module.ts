@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { FormComponent } from './pages/form/form.component';
-import { LayoutComponent } from './components/layout/layout.component';
+
+import { LayoutComponent } from '@components/layout/layout.component';
+
 import { SignInAndSignUpComponent } from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { ResultsComponent } from './pages/results/results.component';
+import { HomeComponent } from './pages/home/home.component';
+import { FormComponent } from './pages/form/form.component';
 
 import { AccessGuard } from '@guards/access/access.guard';
 import { ExistingUserGuard } from '@guards/existingUser/existing-user.guard';

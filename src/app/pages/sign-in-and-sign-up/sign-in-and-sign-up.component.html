@@ -49,9 +49,9 @@
       </form>
 
       <!-- 
-        Logup
+        signup
        -->
-      <form class="sign-up-form" [formGroup]="logupForm">
+      <form class="sign-up-form" [formGroup]="signupForm">
         <h2 class="title">Register to QuizApp</h2>
         <mat-form-field class="input-field" appearance="fill">
           <mat-label>Email</mat-label>
@@ -59,13 +59,13 @@
           <mat-hint>Errors appear instantly!</mat-hint>
           <mat-error
             *ngIf="
-              emailLogupFormControl?.hasError('email') &&
-              !emailLogupFormControl?.hasError('required')
+              emailsignupFormControl?.hasError('email') &&
+              !emailsignupFormControl?.hasError('required')
             "
           >
             Please enter a valid email address
           </mat-error>
-          <mat-error *ngIf="emailLogupFormControl?.hasError('required')">
+          <mat-error *ngIf="emailsignupFormControl?.hasError('required')">
             Email is <strong>required</strong>
           </mat-error>
         </mat-form-field>
@@ -74,7 +74,7 @@
           <mat-label>Name</mat-label>
           <input type="text" matInput formControlName="name" />
           <mat-hint>Errors appear instantly!</mat-hint>
-          <mat-error *ngIf="nameLogupFormControl?.hasError('required')">
+          <mat-error *ngIf="namesignupFormControl?.hasError('required')">
             Name is <strong>required</strong>
           </mat-error>
         </mat-form-field>
@@ -83,11 +83,11 @@
           <mat-label>Password</mat-label>
           <input type="password" matInput formControlName="password" />
 
-          <mat-error *ngIf="passwordLogupFormControl?.hasError('required')">
+          <mat-error *ngIf="passwordsignupFormControl?.hasError('required')">
             Password is <strong>required</strong>
           </mat-error>
 
-          <mat-error *ngIf="passwordLogupFormControl?.hasError('minlength')">
+          <mat-error *ngIf="passwordsignupFormControl?.hasError('minlength')">
             At least <strong>9</strong> characters
           </mat-error>
         </mat-form-field>
@@ -121,7 +121,7 @@
             Login
           </button>
         </div>
-        <img src="assets/img/logup.svg" class="image" alt="" />
+        <img src="assets/img/signup.svg" class="image" alt="" />
       </div>
     </div>
   </div>

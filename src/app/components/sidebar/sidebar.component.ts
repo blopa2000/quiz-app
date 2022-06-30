@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-import { StoreService } from '@services/store/store.service';
-import { User } from '@models/user.model';
 import { DocumentData } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
+
+import { User } from '@models/user.model';
+
 import { SettingDialogComponent } from '@components/setting-dialog/setting-dialog.component';
+
+import { StoreService } from '@services/store/store.service';
 
 @Component({
   selector: 'app-sidebar',

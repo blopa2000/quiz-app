@@ -1,5 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
+import { onAuthStateChanged } from '@firebase/auth';
+import { Observable } from 'rxjs';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -7,8 +9,6 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { onAuthStateChanged } from '@firebase/auth';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

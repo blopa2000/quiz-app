@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -6,8 +8,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Auth, onAuthStateChanged } from '@angular/fire/auth';
+
 import { UserService } from '@services/user/user.service';
 
 @Injectable({
