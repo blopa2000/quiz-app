@@ -20,6 +20,7 @@
     &::ng-deep.mat-form-field {
       width: 100%;
       margin-bottom: 5px;
+      z-index: 10;
     }
 
     &__radio {
@@ -29,6 +30,18 @@
       margin-bottom: 10px;
       &::ng-deep.mat-form-field {
         width: 85%;
+      }
+
+      .btn__answer {
+        z-index: 5;
+      }
+
+      .done {
+        color: green;
+      }
+
+      .noMore {
+        color: red;
       }
     }
   }
@@ -40,6 +53,7 @@
       position: absolute;
       top: 0;
       opacity: 0.5;
+      cursor: move;
 
       &:nth-child(1) {
         margin-left: 45%;
@@ -62,11 +76,18 @@
       display: flex;
       flex-direction: column;
 
-      div {
+      .options-content {
         margin: 10px;
         position: relative;
-        &::ng-deep.mat-radio-label-content::first-letter {
-          text-transform: uppercase;
+
+        .radio-simulation {
+          display: flex;
+          align-items: center;
+
+          p {
+            margin: 0;
+            margin-left: 5px;
+          }
         }
         .btn__delete__answer {
           position: absolute;
@@ -102,7 +123,7 @@
     transition: all 0.5s ease-in-out;
 
     &-show {
-      bottom: 35px;
+      bottom: 65px;
       opacity: 1;
     }
   }

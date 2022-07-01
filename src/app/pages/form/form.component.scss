@@ -34,7 +34,9 @@
 
     @media (max-width: 700px) {
       margin: 10px 5px;
-      width: auto;
+      padding: 10px;
+      width: 85vw;
+      overflow: scroll;
     }
   }
 

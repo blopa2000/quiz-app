@@ -28,7 +28,7 @@
   <div cdkDropList (cdkDropListDropped)="drop($event)">
     <div *ngFor="let question of questions; let i = index" cdkDrag>
       <mat-card class="card">
-        <div class="drag__card">
+        <div class="drag__card" cdkDragHandle>
           <mat-icon>drag_handle</mat-icon>
         </div>
         <button
@@ -44,7 +44,7 @@
           <h4>{{ question.title }}</h4>
         </mat-card-title>
         <mat-radio-group class="options">
-          <div *ngFor="let answer of question.answers">
+          <div class="options-content" *ngFor="let answer of question.answers">
             <mat-radio-button
               disabled
               [checked]="answer.isCorrect"
@@ -71,14 +71,18 @@
     </mat-form-field>
 
     <mat-radio-group class="options">
-      <div *ngFor="let answer of answers; let i = index">
-        <mat-radio-button
-          disabled
-          [checked]="answer.isCorrect"
-          [value]="answer.text"
-        >
-          {{ answer.text }}
-        </mat-radio-button>
+      <div
+        *ngFor="let answer of answers; let i = index"
+        class="options-content"
+      >
+        <div class="radio-simulation">
+          <mat-icon *ngIf="answer.isCorrect">radio_button_checked</mat-icon>
+          <mat-icon *ngIf="!answer.isCorrect">radio_button_unchecked</mat-icon>
+          <p>
+            {{ answer.text }}
+          </p>
+        </div>
+
         <button
           aria-label="delete icon"
           matTooltip="delete this answer"
@@ -106,6 +110,7 @@
           matTooltip="add answer"
           mat-icon-button
           aria-label="add icon"
+          class="btn__answer"
           (click)="addAnswer()"
         >
           <mat-icon>add_circle</mat-icon>
@@ -115,6 +120,9 @@
           matTooltip="this is the correct answer"
           mat-icon-button
           aria-label="add icon"
+          class="btn__answer"
+          [class.done]="isCorrectAnswer"
+          [class.noMore]="isCorrectAnswer === null"
           [disabled]="isCorrectAnswer === null"
           (click)="isCorrectAnswer = true"
         >

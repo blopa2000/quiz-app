@@ -138,17 +138,26 @@ export class FormQuizComponent implements OnInit {
     if (this.titleQustionField.invalid)
       return this.titleQustionField.markAllAsTouched();
 
-    if (this.answers.length < 2)
+    if (this.answers.length < 2) {
       return (this.alertAnswer = {
         show: true,
         message: 'Must have at least 2 answers',
       });
+    }
 
-    if (!this.isCorrectAnswer && this.isCorrectAnswer !== null)
+    if (!this.isCorrectAnswer && this.isCorrectAnswer !== null) {
       return (this.alertAnswer = {
         show: true,
         message: 'You have to mark the correct answer',
       });
+    }
+
+    if (this.answers.find((answer) => answer.isCorrect) === undefined) {
+      return (this.alertAnswer = {
+        show: true,
+        message: 'You have to add the answer that you marked as correct',
+      });
+    }
 
     this.questions.push({
       title: this.titleQustionField.value,
@@ -162,12 +171,14 @@ export class FormQuizComponent implements OnInit {
   }
 
   addAnswer() {
-    this.answers.push({
-      text: this.answerTextFiled.value,
-      isCorrect: this.isCorrectAnswer ? this.isCorrectAnswer : false,
-    });
-    if (this.isCorrectAnswer) this.isCorrectAnswer = null;
-    this.answerTextFiled.reset();
+    if (this.answerTextFiled.value.length !== 0) {
+      this.answers.push({
+        text: this.answerTextFiled.value,
+        isCorrect: this.isCorrectAnswer ? this.isCorrectAnswer : false,
+      });
+      if (this.isCorrectAnswer) this.isCorrectAnswer = null;
+      this.answerTextFiled.reset();
+    }
   }
 
   deleteQuestion(id: any) {

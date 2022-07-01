@@ -290,6 +290,19 @@
 }
 
 @media (max-width: 570px) {
+  .container {
+    &::before {
+      bottom: 84%;
+    }
+  }
+
+  .container.sign-up-mode::before {
+    bottom: 22%;
+  }
+
+    .container.sign-up-mode .right-panel {
+      padding: 3rem 12% 0 17%;
+    }
   form {
     padding: 0 1.5rem !important;
   }
@@ -298,7 +311,7 @@
   }
 
   .sign-up-form {
-    margin-bottom: 60px;
+    margin-bottom: 10px;
   }
 
   .right-panel {
@@ -310,9 +323,14 @@
     padding: 0 !important;
   }
 
+  .left-panel,
   .right-panel {
+    h3 {
+      display: none;
+    }
     p {
       padding: 0 !important;
+      display: none;
     }
   }
 }
