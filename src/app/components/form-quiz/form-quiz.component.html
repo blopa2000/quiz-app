@@ -129,14 +129,13 @@
           <mat-icon>done</mat-icon>
         </button>
       </div>
-
-      <div class="alert" [class.alert-show]="alertAnswer.show">
-        <span> {{ alertAnswer.message }} </span>
-      </div>
     </mat-radio-group>
     <button class="btn__add__form" mat-stroked-button (click)="saveQuestion()">
       add question
     </button>
+    <div class="alert" [class.alert-show]="alertAnswer.show">
+      <span> {{ alertAnswer.message }} </span>
+    </div>
   </mat-card>
 
   <button

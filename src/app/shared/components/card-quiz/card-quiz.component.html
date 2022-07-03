@@ -10,11 +10,11 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item [routerLink]="['..', 'edit', quiz.id]">
-          edit
+          Edit
         </button>
-        <button mat-menu-item (click)="deleteQuiz(quiz.id, i)">delete</button>
+        <button mat-menu-item (click)="deleteQuiz(quiz.id, i)">Delete</button>
         <a mat-menu-item [routerLink]="['..', 'detail', quiz.id, quiz.title]"
-          >detail</a
+          >Detail</a
         >
       </mat-menu>
     </div>
